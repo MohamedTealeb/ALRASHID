@@ -1,0 +1,58 @@
+{
+  "navbar": {
+    "brand": "Learn",
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact"
+  },
+  "Hero": {
+    "title": "Welcome to Our Website",
+    "subtitle": "We provide the best services for you.",
+    "cta": "Get Started"
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email address",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "loginButton": "Login",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up now",
+    "copyright": "© 2023 WCS LAT"
+  },
+  "slider": {
+    "slide1Alt": "First slide image",
+    "slide2Alt": "Second slide image", 
+    "slide3Alt": "Third slide image",
+    "title": "Activities"
+  },
+  "academic": {
+    "title": "The Necessary Foundation for Academic Excellence",
+    "subtitle": "Select the best personalized courses for academic excellence and exam readiness",
+    "primaryCta": "Explore Courses",
+    "secondaryCta": "Student's Registration"
+  },
+  "common": {
+    "loading": "Loading...",
+    "language": "Language"
+  },
+  "footer": {
+    "brand": "Q-LE",
+    "tagline": "Learning reimagined",
+    "socialTitle": "Social",
+    "links": {
+      "about": "About",
+      "courses": "Courses",
+      "contact": "Contact",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "copyright": "All rights reserved."
+  }
+}
