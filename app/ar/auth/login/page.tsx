@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from 'react';
@@ -12,7 +11,7 @@ import { useMutation } from '@tanstack/react-query';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { translations, language } = useLanguage();
+  const { translations } = useLanguage();
   const [rememberMe, setRememberMe] = useState(false);
   const [formData, setFormData] = useState({
     studentId: '',
@@ -37,7 +36,7 @@ export default function LoginPage() {
       if (role === 'admin') {
         router.push('/dashboard');
       } else if (role === 'student') {
-        router.push('/student-dashboard'); // You'll need to create this page
+        router.push('/student-dashboard');
       }
     },
     onError: (error) => {
@@ -63,9 +62,9 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
       {/* زر تبديل اللغة */}
       <div className="absolute top-4 right-4 z-20">
-        <Link href="/ar/auth/login">
+        <Link href="/auth/login">
           <button className="bg-white hover:bg-gray-50 text-[#B33791] hover:text-[#a02e80] px-4 py-2 rounded-full shadow-lg border border-gray-200 transition-all duration-200 font-cairo font-semibold">
-            العربية
+            English
           </button>
         </Link>
       </div>
@@ -85,16 +84,16 @@ export default function LoginPage() {
               <div className="w-20 h-20 bg-[#B33791]/10 rounded-full flex items-center justify-center">
                 <img 
                   src={ASSETS_PATHS.logo} 
-                  alt="ALRASHID Indian School" 
+                  alt="مدرسة الراشد الهندية" 
                   className="w-12 h-12 object-contain"
                 />
               </div>
             </div>
             <h1 className="text-3xl font-bold text-[#B33791] font-cairo mb-2">
-              {translations?.login?.title || "Login"}
+              {translations?.login?.title || "تسجيل الدخول"}
             </h1>
             <p className="text-gray-600 font-cairo">
-              {translations?.login?.subtitle || "Welcome to ALRASHID Indian School"}
+              {translations?.login?.subtitle || "مرحباً بك في مدرسة الراشد الهندية"}
             </p>
           </div>
 
@@ -103,7 +102,7 @@ export default function LoginPage() {
             {/* رقم الطالب */}
             <div>
               <label htmlFor="studentId" className="block text-sm font-semibold text-gray-700 mb-2 font-cairo">
-                {translations?.login?.studentId || "Student ID"}
+                {translations?.login?.studentId || "رقم الطالب"}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -115,10 +114,8 @@ export default function LoginPage() {
                   name="studentId"
                   value={formData.studentId}
                   onChange={handleInputChange}
-                  className={`w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B33791] focus:border-transparent transition-all duration-200 font-cairo ${
-                    language === 'ar' ? 'text-right' : ''
-                  }`}
-                  placeholder={translations?.login?.studentId || (language === 'ar' ? "رقم الطالب" : "Student ID")}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B33791] focus:border-transparent transition-all duration-200 font-cairo text-right"
+                  placeholder={translations?.login?.studentId || "رقم الطالب"}
                   required
                 />
               </div>
@@ -127,7 +124,7 @@ export default function LoginPage() {
             {/* رقم ولي الأمر */}
             <div>
               <label htmlFor="parentId" className="block text-sm font-semibold text-gray-700 mb-2 font-cairo">
-                {translations?.login?.parentId || "Parent ID"}
+                {translations?.login?.parentId || "رقم ولي الأمر"}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -139,10 +136,8 @@ export default function LoginPage() {
                   name="parentId"
                   value={formData.parentId}
                   onChange={handleInputChange}
-                  className={`w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B33791] focus:border-transparent transition-all duration-200 font-cairo ${
-                    language === 'ar' ? 'text-right' : ''
-                  }`}
-                  placeholder={translations?.login?.parentId || (language === 'ar' ? "رقم ولي الأمر" : "Parent ID")}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B33791] focus:border-transparent transition-all duration-200 font-cairo text-right"
+                  placeholder={translations?.login?.parentId || "رقم ولي الأمر"}
                   required
                 />
               </div>
@@ -158,10 +153,9 @@ export default function LoginPage() {
                   className="w-4 h-4 text-[#B33791] bg-gray-100 border-gray-300 rounded focus:ring-[#B33791] focus:ring-2"
                 />
                 <span className="ml-2 text-sm text-gray-600 font-cairo">
-                  {translations?.login?.rememberMe || "Remember Me"}
+                  {translations?.login?.rememberMe || "تذكرني"}
                 </span>
               </label>
-             
             </div>
 
             {/* زر تسجيل الدخول */}
@@ -172,24 +166,21 @@ export default function LoginPage() {
             >
               <span>
                 {loginMutation.isPending 
-                  ? (translations?.login?.loggingIn || "Logging in...") 
-                  : (translations?.login?.loginButton || "Login")
+                  ? (translations?.login?.loggingIn || "جاري تسجيل الدخول...") 
+                  : (translations?.login?.loginButton || "تسجيل الدخول")
                 }
               </span>
               <ArrowRight className="w-5 h-5" />
             </button>
           </form>
 
-          {/* رابط إنشاء حساب جديد */}
-       
-
           {/* العودة للصفحة الرئيسية */}
           <div className="mt-6 text-center">
             <Link 
-              href="/en" 
+              href="/ar" 
               className="text-gray-500 hover:text-[#B33791] font-cairo text-sm transition-colors duration-200"
             >
-              ← Back to Home
+              ← العودة للصفحة الرئيسية
             </Link>
           </div>
         </div>

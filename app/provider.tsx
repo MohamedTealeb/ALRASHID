@@ -6,7 +6,11 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 
 import {  useState } from "react";
 
-export default function Providers({ children }:ProvidersProps) {
+interface ProvidersProps {
+  children: React.ReactNode;
+}
+
+export default function Providers({ children }: ProvidersProps) {
   const [queryClient] = useState(() => new QueryClient());
 
   return (

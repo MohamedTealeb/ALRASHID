@@ -11,12 +11,12 @@ const cairo = Cairo({
 });
 
 export const metadata = {
-  title: "Q-LE",
-  description: "Q-LE",
+  title: "ALRASHID ",
+  description: "ALRASHID INDIAN SCHOOL",
   icons: {
     icon: [
-      // { url: "/99.png",  type: "image/png" },
-      // { url: "/99.png",  type: "image/png" },
+      { url: "/logo.jpg",  type: "image/png" },
+      { url: "/logo.jpg",  type: "image/png" },
     ],
     
   },

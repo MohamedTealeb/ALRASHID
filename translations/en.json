@@ -1,47 +1,158 @@
 {
   "navbar": {
-    "brand": "Learn",
+    "brand": "ALRASHID INDIAN SCHOOL",
+    "brandEn": "مدرسة الراشد الهندية",
     "home": "Home",
-    "about": "About",
-    "services": "Services",
-    "contact": "Contact"
+    "about": "About Us",
+    "academics": "Academics",
+    "schoolLife": "School Life",
+    "admissions": "Admissions",
+    "activities": "Activities"
   },
   "Hero": {
     "title": "Welcome to Our Website",
     "subtitle": "We provide the best services for you.",
     "cta": "Get Started"
   },
-  "login": {
-    "title": "Login",
-    "email": "Email address",
-    "password": "Password",
-    "forgotPassword": "Forgot your password?",
-    "loginButton": "Login",
-    "noAccount": "Don't have an account?",
-    "signUp": "Sign up now",
-    "copyright": "© 2023 WCS LAT"
-  },
   "slider": {
+    "title": "Activities",
+    "subtitle": "Discover the diverse activities and exceptional educational programs in our school",
     "slide1Alt": "First slide image",
     "slide2Alt": "Second slide image", 
     "slide3Alt": "Third slide image",
-    "title": "Activities"
+    "slideDescription": "Discover more exceptional activities in our school",
+    "controls": {
+      "pauseAutoPlay": "Pause Auto Play",
+      "startAutoPlay": "Start Auto Play"
+    }
+  },
+  "video": {
+    "title": "Watch Our School",
+    "subtitle": "Discover the exceptional learning environment and modern facilities at ALRASHID Indian School",
+    "features": {
+      "highQuality": "High Quality",
+      "educationalContent": "Educational Content",
+      "free": "Free"
+    }
   },
   "academic": {
     "title": "The Necessary Foundation for Academic Excellence",
     "subtitle": "Select the best personalized courses for academic excellence and exam readiness",
     "primaryCta": "Explore Courses",
-    "secondaryCta": "Student's Registration"
+    "secondaryCta": "Student's Registration",
+    "sections": {
+      "mainTitle": "Our Academic Sections",
+      "mainSubtitle": "We provide comprehensive and advanced education for all age groups while considering special needs",
+      "earlyYears": {
+        "title": "Early Years",
+        "description": "KG and Reception (3 to 5 years)"
+      },
+      "primarySchool": {
+        "title": "Primary School",
+        "description": "Years 1 to 6 (5 – 11 years)"
+      },
+      "secondarySchool": {
+        "title": "Secondary School",
+        "description": "Years 7 to 13 (11 – 18 years)"
+      },
+      "greenUnit": {
+        "title": "Green Unit",
+        "description": "Special Needs Education"
+      }
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "ALRASHID Indian School - An Exceptional Educational Journey",
+    "description": "We are a leading educational institution committed to providing exceptional education that combines authenticity with modernity. We aim to develop students' capabilities and enhance their skills in a stimulating and innovative educational environment.",
+    "vision": {
+      "title": "Our Vision",
+      "description": "To be the leading school in providing exceptional education that meets the requirements of the modern era while preserving authentic values."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To provide an integrated educational environment that stimulates creativity and excellence, and develops balanced personalities for students."
+    },
+    "values": {
+      "title": "Our Values",
+      "values": [
+        {
+          "title": "Academic Excellence",
+          "description": "We strive to achieve the highest levels of excellence in education"
+        },
+        {
+          "title": "Innovation",
+          "description": "We encourage creative thinking and innovation in all fields"
+        },
+        {
+          "title": "Integrity",
+          "description": "We are committed to the highest standards of ethics and transparency"
+        },
+        {
+          "title": "Collaboration",
+          "description": "We believe in the power of teamwork and constructive cooperation"
+        }
+      ]
+    },
+    "stats": {
+      "students": "Students",
+      "teachers": "Teachers",
+      "years": "Years Experience",
+      "programs": "Programs"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "subtitle": "Welcome to ALRASHID Indian School",
+    "studentId": "Student ID",
+    "parentId": "Parent ID",
+    "loginButton": "Login",
+    "loggingIn": "Logging in...",
+    "forgotPassword": "Forgot Password?",
+    "rememberMe": "Remember Me",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up"
+  },
+  "dashboard": {
+    "adminTitle": "Admin Dashboard",
+    "adminWelcome": "Welcome back, Admin!",
+    "studentTitle": "Student Dashboard",
+    "welcome": "Welcome back, Student!",
+    "logout": "Logout",
+    "totalStudents": "Total Students",
+    "totalCourses": "Total Courses",
+    "pendingAssignments": "Pending Assignments",
+    "analytics": "Analytics",
+    "quickActions": "Quick Actions",
+    "addUser": "Add User",
+    "addCourse": "Add Course",
+    "schedule": "Schedule",
+    "settings": "Settings",
+    "recentActivity": "Recent Activity",
+    "newStudentEnrolled": "New student enrolled in Grade 10",
+    "courseCreated": "New course 'Advanced Mathematics' created",
+    "assignmentPosted": "Assignment posted for Grade 9 Science",
+    "statisticsOverview": "Statistics Overview",
+    "attendanceRate": "Attendance Rate",
+    "assignmentCompletion": "Assignment Completion",
+    "overallPerformance": "Overall Performance",
+    "myCourses": "My Courses",
+    "assignments": "Assignments",
+    "profile": "Profile",
+    "newAssignment": "New assignment posted in Mathematics",
+    "gradePosted": "Grade posted for English essay",
+    "classReminder": "Reminder: Science class at 10:00 AM"
   },
   "common": {
     "loading": "Loading...",
     "language": "Language"
   },
   "footer": {
-    "brand": "Q-LE",
-    "tagline": "Learning reimagined",
-    "socialTitle": "Social",
+    "brand": "ALRASHID Indian School",
+    "tagline": "We provide exceptional education that instills values and academic excellence in students",
+    "socialTitle": "Social Media",
     "links": {
+      "title": "Quick Links",
       "about": "About",
       "courses": "Courses",
       "contact": "Contact",
@@ -49,9 +160,20 @@
       "terms": "Terms of Service"
     },
     "contact": {
-      "title": "Contact",
+      "title": "Contact Information",
       "email": "Email",
       "phone": "Phone"
+    },
+    "workingHours": {
+      "title": "Working Hours",
+      "weekdays": "Sunday - Thursday",
+      "weekdaysTime": "7:00 AM - 2:00 PM",
+      "weekend": "Friday - Saturday",
+      "weekendTime": "Closed",
+      "note": "Working hours may vary during official holidays"
+    },
+    "bottom": {
+      "designBy": "Designed with ❤️ for Excellence in Education"
     },
     "copyright": "All rights reserved."
   }
