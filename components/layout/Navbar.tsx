@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/sheet";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ASSETS_PATHS } from "../constants/AssetsPaths";
+import { useAuth, useLogout } from "@/hooks/use-auth";
+import { User } from "lucide-react";
 import { gsap } from "gsap";
 
 // Animated Link Component
@@ -60,6 +62,8 @@ const AnimatedLink = ({ href, children, onClick, className = "" }: {
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { language, translations, toggleLanguage } = useLanguage();
+  const { isAuthenticated } = useAuth();
+  const logout = useLogout();
 
   return (
     <header className="w-full bg-white shadow-sm">
@@ -118,16 +122,29 @@ export default function Navbar() {
           )}
         </nav>
 
-        {/* Login Button and Language */}
+        {/* Login Button/Profile Icon and Language */}
         <div className="hidden md:flex items-center space-x-4">
-          <Link href={language === "ar" ? "/ar/auth/login" : "/auth/login"}>
-            <Button
-              variant="outline"
-              className="text-sm border-[#B33791] text-[#B33791] hover:bg-[#B33791] hover:text-white font-cairo"
-            >
-              {language === "ar" ? "تسجيل الدخول" : "Login"}
-            </Button>
-          </Link>
+          {isAuthenticated ? (
+            <Link href="/profile">
+              <Button
+                variant="outline"
+                size="icon"
+                className="border-[#B33791] text-[#B33791] hover:bg-[#B33791] hover:text-white"
+                title={language === "ar" ? "الملف الشخصي" : "Profile"}
+              >
+                <User className="h-4 w-4" />
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/auth/login">
+              <Button
+                variant="outline"
+                className="text-sm border-[#B33791] text-[#B33791] hover:bg-[#B33791] hover:text-white font-cairo"
+              >
+                {language === "ar" ? "تسجيل الدخول" : "Login"}
+              </Button>
+            </Link>
+          )}
           <Button
             variant="outline"
             className="text-sm border-gray-700 text-gray-700 hover:bg-main/10 hover:border-main hover:text-main font-sans"
@@ -203,16 +220,28 @@ export default function Navbar() {
                 )}
               </nav>
 
-              {/* زر تسجيل الدخول واللغة داخل القائمة الجانبية */}
+              {/* زر تسجيل الدخول/البروفايل واللغة داخل القائمة الجانبية */}
               <div className="mt-6 flex flex-col space-y-4">
-                <Link href={language === "ar" ? "/ar/auth/login" : "/auth/login"} onClick={() => setOpen(false)}>
-                  <Button
-                    variant="outline"
-                    className="w-full border-[#B33791] text-[#B33791] hover:bg-[#B33791] hover:text-white font-cairo"
-                  >
-                    {language === "ar" ? "تسجيل الدخول" : "Login"}
-                  </Button>
-                </Link>
+                {isAuthenticated ? (
+                  <Link href="/profile" onClick={() => setOpen(false)}>
+                    <Button
+                      variant="outline"
+                      className="w-full border-[#B33791] text-[#B33791] hover:bg-[#B33791] hover:text-white font-cairo flex items-center gap-2"
+                    >
+                      <User className="h-4 w-4" />
+                      {language === "ar" ? "الملف الشخصي" : "Profile"}
+                    </Button>
+                  </Link>
+                ) : (
+                  <Link href={language === "ar" ? "/ar/auth/login" : "/auth/login"} onClick={() => setOpen(false)}>
+                    <Button
+                      variant="outline"
+                      className="w-full border-[#B33791] text-[#B33791] hover:bg-[#B33791] hover:text-white font-cairo"
+                    >
+                      {language === "ar" ? "تسجيل الدخول" : "Login"}
+                    </Button>
+                  </Link>
+                )}
                 <Button
                   variant="outline"
                   className="border-gray-700 text-gray-700 hover:bg-main/10 hover:border-main hover:text-main font-sans"

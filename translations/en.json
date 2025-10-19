@@ -104,14 +104,16 @@
   "login": {
     "title": "Login",
     "subtitle": "Welcome to ALRASHID Indian School",
-    "studentId": "Student ID",
-    "parentId": "Parent ID",
+    "studentId": "Email",
+    "parentId": "Password",
     "loginButton": "Login",
     "loggingIn": "Logging in...",
     "forgotPassword": "Forgot Password?",
     "rememberMe": "Remember Me",
     "noAccount": "Don't have an account?",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "successMessage": "Logged in successfully!",
+    "errorMessage": "Login failed. Please check your credentials and try again."
   },
   "dashboard": {
     "adminTitle": "Admin Dashboard",

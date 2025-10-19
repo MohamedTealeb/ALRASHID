@@ -35,15 +35,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem('language', lang);
-    
-    // إعادة توجيه للصفحة المناسبة للغة
-    if (typeof window !== 'undefined') {
-      const currentPath = window.location.pathname;
-      const newPath = currentPath.replace(/^\/[a-z]{2}/, `/${lang}`);
-      if (newPath !== currentPath) {
-        window.location.href = newPath;
-      }
-    }
+    // لا نغيّر المسار عند تبديل اللغة
   };
 
   const toggleLanguage = () => {
