@@ -2,6 +2,7 @@
 
 import { ASSETS_PATHS } from './../constants/AssetsPaths';
 import { useLanguage } from '@/contexts/LanguageContext';
+import Image from 'next/image';
 
 export default function Hero() {
   const { translations } = useLanguage();
@@ -9,10 +10,12 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
       {/* صورة الخلفية */}
-      <img 
+      <Image 
         src={ASSETS_PATHS.img_Background} 
         alt="Background" 
-        className="absolute inset-0 w-full h-full object-cover"
+        fill
+        className="object-cover"
+        priority
       />
 
       {/* طبقة تظليل خفيفة بلون أساسي شفاف */}

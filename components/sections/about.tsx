@@ -2,6 +2,7 @@
 
 import { ASSETS_PATHS } from "../constants/AssetsPaths";
 import { useLanguage } from "@/contexts/LanguageContext";
+import Image from 'next/image';
 
 export default function About() {
     const { translations } = useLanguage();
@@ -58,9 +59,11 @@ export default function About() {
                     {/* الصورة */}
                     <div className="relative">
                         <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                            <img 
+                            <Image 
                                 src={ASSETS_PATHS.about} 
                                 alt="مدرسة الراشد الهندية" 
+                                width={600}
+                                height={400}
                                 className="w-full h-auto object-cover"
                             />
                             {/* طبقة تدرج */}

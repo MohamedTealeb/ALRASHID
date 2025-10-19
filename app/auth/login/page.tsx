@@ -1,10 +1,11 @@
 "use client";
 import { toast } from 'react-toastify';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ASSETS_PATHS } from '@/components/constants/AssetsPaths';
-import { Mail, Lock, ArrowRight } from 'lucide-react';
+import { Mail, Lock, ArrowRight, Eye, EyeOff } from 'lucide-react';
 import { useRouter } from "next/navigation";
 import { useLogin } from '@/hooks/use-auth';
 
@@ -29,7 +30,7 @@ export default function LoginPage() {
         toast.success(translations?.login?.successMessage || "Login successful!");
         router.push('/profile');
       }
-    } catch (err) {
+    } catch {
       toast.error(
         translations?.login?.errorMessage ||
           "Login failed. Please check your credentials and try again."
@@ -68,10 +69,12 @@ export default function LoginPage() {
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
               <div className="w-20 h-20 bg-[#B33791]/10 rounded-full flex items-center justify-center">
-                <img 
+                <Image 
                   src={ASSETS_PATHS.logo} 
                   alt="ALRASHID Indian School" 
-                  className="w-12 h-12 object-contain"
+                  width={48}
+                  height={48}
+                  className="object-contain"
                 />
               </div>
             </div>
@@ -99,7 +102,7 @@ export default function LoginPage() {
                   id="studentId"
                   name="studentId"
                   value={form.studentId}
-                  onChange={(e)=>setForm({...form,studentId:Number(e.target.value)})}
+                  onChange={(e)=>setForm({...form,studentId:e.target.value})}
                   
                
                   className={`w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B33791] focus:border-transparent transition-all duration-200 font-cairo ${
@@ -125,13 +128,20 @@ export default function LoginPage() {
                   id="parentId"
                   name="parentId"
                value={form.parentId}
-                onChange={(e)=>setForm({...form,parentId:Number(e.target.value)})}
-                  className={`w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B33791] focus:border-transparent transition-all duration-200 font-cairo ${
+                onChange={(e)=>setForm({...form,parentId:e.target.value})}
+                  className={`w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B33791] focus:border-transparent transition-all duration-200 font-cairo ${
                     language === 'ar' ? 'text-right' : ''
                   }`}
                   placeholder={translations?.login?.parentId || (language === 'ar' ? "رقم ولي الأمر" : "Parent ID")}
                   required
                 />
+                <button
+                  type="button"
+                  onClick={() => setShow(!show)}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                >
+                  {show ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                </button>
               </div>
             </div>
 

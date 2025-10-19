@@ -1,18 +1,59 @@
 "use client";
 
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useAuth, useLogout } from "@/hooks/use-auth";
+import { useLogout } from "@/hooks/use-auth";
 import { getProfile } from "@/services/auth";
 import { ASSETS_PATHS } from "@/components/constants/AssetsPaths";
-import { User, ArrowLeft, Edit, Settings, Mail, Phone, MapPin, Calendar, LogOut } from "lucide-react";
+import { User, ArrowLeft, Settings, Calendar, LogOut } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
+import Image from "next/image";
+
+// TypeScript interfaces
+interface Subject {
+  _id?: string;
+  subject: string;
+  marksScored: number;
+  maxMarks: number;
+  passedMarks: number;
+  grade: string;
+}
+
+interface Result {
+  _id?: string;
+  studentName: string;
+  yearId: string;
+  className: string;
+  division?: string;
+  civilId: string;
+  percentage: number;
+  totalMarksScored: number;
+  totalMaxMarks: number;
+  totalPassedMarks: number;
+  subjects: Subject[];
+}
+
+interface UserData {
+  studentName: string;
+  parentName: string;
+  StudentID: string;
+  yearId: string;
+  className: string;
+  role: string;
+}
+
+interface ProfileData {
+  data: {
+    user: UserData;
+    results: Result[];
+  };
+}
 
 export default function ProfilePage() {
   const { language, translations } = useLanguage();
-  const [profileData, setProfileData] = useState<any>(null);
+  const [profileData, setProfileData] = useState<ProfileData | null>(null);
   const [rawResponse, setRawResponse] = useState<string | null>(null);
   const logout = useLogout();
 
@@ -35,19 +76,6 @@ export default function ProfilePage() {
     profileMutation.mutate();
   }, []);
 
-  const renderProfileField = (label: string, value: any, icon: React.ReactNode = null) => {
-    if (!value) return null;
-    
-    return (
-      <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-        {icon && <div className="text-[#B33791]">{icon}</div>}
-        <div className="flex-1">
-          <p className="text-sm font-medium text-gray-600 font-cairo">{label}</p>
-          <p className="text-gray-800 font-cairo">{value}</p>
-        </div>
-      </div>
-    );
-  };
 
 
   return (
@@ -56,10 +84,12 @@ export default function ProfilePage() {
         {/* Header */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
           <div className="flex items-center space-x-4 mb-4">
-            <img 
+            <Image 
               src={ASSETS_PATHS.logo} 
               alt="ALRASHID Indian School" 
-              className="w-12 h-12 object-contain"
+              width={48}
+              height={48}
+              className="object-contain"
             />
             <div>
               <h3 className="text-lg font-semibold text-gray-800 font-cairo">
@@ -92,17 +122,7 @@ export default function ProfilePage() {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-            <Button
-              variant="outline"
-              onClick={() => profileMutation.mutate()}
-              disabled={profileMutation.isPending}
-              className="border-[#B33791] text-[#B33791] hover:bg-[#B33791] hover:text-white font-cairo transition-colors duration-200"
-            >
-              {profileMutation.isPending 
-                ? (language === "ar" ? "جاري التحديث..." : "Refreshing...")
-                : (language === "ar" ? "تحديث البيانات" : "Refresh Data")
-              }
-            </Button>
+           
             <Button
               variant="outline"
               onClick={logout}
@@ -114,15 +134,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Loading State */}
-        {profileMutation.isPending && (
-          <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#B33791] mx-auto mb-4"></div>
-            <p className="text-gray-600 font-cairo">
-              {language === "ar" ? "جاري تحميل البيانات..." : "Loading profile data..."}
-            </p>
-          </div>
-        )}
+     
 
         {/* Error State */}
         {profileMutation.isError && (
@@ -216,7 +228,7 @@ export default function ProfilePage() {
         {/* Student Results */}
         {profileData && profileData.data && profileData.data.results && Array.isArray(profileData.data.results) && profileData.data.results.length > 0 ? (
           <div className="space-y-6">
-            {profileData.data.results.map((result: any, index: number) => (
+            {profileData.data.results.map((result: Result, index: number) => (
               <div key={result._id || index} className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
                 {/* Student Info Header */}
                 <div className="flex flex-col lg:flex-row items-start lg:items-center space-y-4 lg:space-y-0 lg:space-x-4 mb-6 pb-6 border-b border-gray-200">
@@ -290,7 +302,7 @@ export default function ProfilePage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {result.subjects?.map((subject: any, subjectIndex: number) => {
+                      {result.subjects?.map((subject: Subject, subjectIndex: number) => {
                         const isPassed = subject.marksScored >= subject.passedMarks;
                         return (
                           <tr key={subject._id || subjectIndex} className="hover:bg-gray-50 transition-colors duration-150">

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { ASSETS_PATHS } from "../constants/AssetsPaths";
 import { useLanguage } from "@/contexts/LanguageContext";
+import Image from "next/image";
 
 export default function Slider() {
   const { translations, language } = useLanguage();
@@ -81,10 +82,11 @@ export default function Slider() {
             >
               {images.map((img, idx) => (
                 <div key={idx} className="flex-none w-full h-full relative group">
-                  <img
+                  <Image
                     src={img.src}
                     alt={img.alt}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   {/* طبقة تظليل مع تأثير fade */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>

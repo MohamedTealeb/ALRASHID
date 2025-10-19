@@ -2,6 +2,7 @@
 
 import { ASSETS_PATHS } from "../constants/AssetsPaths";
 import { useLanguage } from "@/contexts/LanguageContext";
+import Image from 'next/image';
 
 export default function Academic() {
     const { translations } = useLanguage();
@@ -31,10 +32,12 @@ export default function Academic() {
                     {/* الصورة */}
                     <div className="flex-1">
                         <div className="relative">
-                            <img 
+                            <Image 
                                 className="w-full h-auto rounded-2xl object-cover shadow-2xl" 
                                 src={ASSETS_PATHS.logo_small} 
                                 alt="Academic excellence" 
+                                width={600}
+                                height={400}
                             />
                             {/* زخرفة خلفية */}
                             <div className="absolute -top-4 -right-4 w-20 h-20 bg-yellow-300 rounded-full opacity-70 animate-bounce"></div>

@@ -14,9 +14,10 @@ import {
 } from "@/components/ui/sheet";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ASSETS_PATHS } from "../constants/AssetsPaths";
-import { useAuth, useLogout } from "@/hooks/use-auth";
+import { useAuth } from "@/hooks/use-auth";
 import { User } from "lucide-react";
 import { gsap } from "gsap";
+import Image from "next/image";
 
 // Animated Link Component
 const AnimatedLink = ({ href, children, onClick, className = "" }: {
@@ -63,7 +64,6 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { language, translations, toggleLanguage } = useLanguage();
   const { isAuthenticated } = useAuth();
-  const logout = useLogout();
 
   return (
     <header className="w-full bg-white shadow-sm">
@@ -71,7 +71,7 @@ export default function Navbar() {
         {/* Logo and School Name */}
         <div className="flex items-center space-x-4">
           <Link href="/" className="flex items-center space-x-3">
-            <img src={ASSETS_PATHS.logo} className="object-contain h-16 w-16" alt="Logo" />
+            <Image src={ASSETS_PATHS.logo} width={64} height={64} className="object-contain" alt="Logo" />
             <div className={`font-sans ${language === "ar" ? "text-right" : "text-left"}`}>
               <div className={`text-lg font-semibold text-gray-800 ${language === "ar" ? "font-bold" : ""}`}>
                 {translations?.navbar.brand}

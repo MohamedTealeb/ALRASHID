@@ -2,6 +2,7 @@
 import { ASSETS_PATHS } from "../constants/AssetsPaths";
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { useLanguage } from '@/contexts/LanguageContext';
+import Image from 'next/image';
 
 export default function Footer() {
     const { translations } = useLanguage();
@@ -13,7 +14,7 @@ export default function Footer() {
                     {/* معلومات المدرسة */}
                     <div className="lg:col-span-1">
                         <div className="flex items-center gap-3 mb-6">
-                            <img src={ASSETS_PATHS.logo} alt="مدرسة الراشد الهندية" className="w-12 h-12 rounded-lg"/>
+                            <Image src={ASSETS_PATHS.logo} alt="مدرسة الراشد الهندية" width={48} height={48} className="rounded-lg"/>
                             <div>
                                 <h3 className="text-xl font-bold font-cairo text-[#B33791]">
                                     {translations.footer?.brand || "مدرسة الراشد الهندية"}
