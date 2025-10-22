@@ -44,9 +44,10 @@
       "mainTitle": "Our Academic Sections",
       "mainSubtitle": "We provide comprehensive and advanced education for all age groups while considering special needs",
       "earlyYears": {
-        "title": "Early Years",
-        "description": "KG and Reception"
-      },
+  "title": "Kindergarten Stage",
+  "description": "Pre-KG to KG2"
+},
+
       "primarySchool": {
         "title": "Primary School",
         "description": "Years 1 to 6"
