@@ -45,19 +45,15 @@
       "mainSubtitle": "We provide comprehensive and advanced education for all age groups while considering special needs",
       "earlyYears": {
         "title": "Early Years",
-        "description": "KG and Reception (3 to 5 years)"
+        "description": "KG and Reception"
       },
       "primarySchool": {
         "title": "Primary School",
-        "description": "Years 1 to 6 (5 – 11 years)"
+        "description": "Years 1 to 6"
       },
       "secondarySchool": {
         "title": "Secondary School",
-        "description": "Years 7 to 13 (11 – 18 years)"
-      },
-      "greenUnit": {
-        "title": "Green Unit",
-        "description": "Special Needs Education"
+        "description": "Years 7 to 13"
       }
     }
   },

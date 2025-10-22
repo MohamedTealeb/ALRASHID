@@ -27,16 +27,6 @@ const SecondarySchoolIcon = () => (
   </svg>
 );
 
-const GreenUnitIcon = () => (
-  <svg className="w-16 h-16 text-[#B33791]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <circle cx="12" cy="12" r="3"/>
-    <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
-    <circle cx="12" cy="3" r="1"/>
-    <circle cx="12" cy="21" r="1"/>
-    <circle cx="21" cy="12" r="1"/>
-    <circle cx="3" cy="12" r="1"/>
-  </svg>
-);
 
 export default function AcademicSections() {
     const { translations } = useLanguage();
@@ -45,23 +35,19 @@ export default function AcademicSections() {
         {
             icon: <EarlyYearsIcon />,
             title: translations?.academic?.sections?.earlyYears?.title || "المرحلة المبكرة",
-            description: translations?.academic?.sections?.earlyYears?.description || "رياض الأطفال والاستقبال (3 إلى 5 سنوات)"
+            description: translations?.academic?.sections?.earlyYears?.description 
         },
         {
             icon: <PrimarySchoolIcon />,
             title: translations?.academic?.sections?.primarySchool?.title || "المدرسة الابتدائية",
-            description: translations?.academic?.sections?.primarySchool?.description || "الصفوف من 1 إلى 6 (5 – 11 سنة)"
+            description: translations?.academic?.sections?.primarySchool?.description 
         },
         {
             icon: <SecondarySchoolIcon />,
             title: translations?.academic?.sections?.secondarySchool?.title || "المدرسة الثانوية",
-            description: translations?.academic?.sections?.secondarySchool?.description || "الصفوف من 7 إلى 13 (11 – 18 سنة)"
+            description: translations?.academic?.sections?.secondarySchool?.description 
         },
-        {
-            icon: <GreenUnitIcon />,
-            title: translations?.academic?.sections?.greenUnit?.title || "الوحدة الخضراء",
-            description: translations?.academic?.sections?.greenUnit?.description || "التعليم الخاص"
-        }
+     
     ];
     
     return (
@@ -76,7 +62,7 @@ export default function AcademicSections() {
                     </p>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {sections.map((section, index) => (
                         <div 
                             key={index}

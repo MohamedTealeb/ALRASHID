@@ -87,8 +87,9 @@ export default function Footer() {
                                 <div>
                                     <p className="text-gray-600 font-cairo text-sm">
                                         <span className="block text-[#B33791] font-semibold">{translations.footer?.contact?.phone || "الهاتف"}</span>
-                                        +966 11 123 4567
-                                    </p>
+                                        +96551735171                                    </p>
+                                    <p className="text-gray-600 font-cairo text-sm">
+                                    +96555328677                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -123,9 +124,7 @@ export default function Footer() {
                         <p className="text-gray-600 font-cairo text-sm">
                             © {new Date().getFullYear()} {translations.footer?.brand || "مدرسة الراشد الهندية"}. {translations.footer?.copyright || "جميع الحقوق محفوظة."}
                         </p>
-                        <div className="flex items-center gap-6 text-xs text-gray-500 font-cairo">
-                            <span>{translations.footer?.bottom?.designBy || "مصمم بـ ❤️ للتعليم المتميز"}</span>
-                        </div>
+                       
                     </div>
                 </div>
             </div>

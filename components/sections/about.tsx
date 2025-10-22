@@ -3,15 +3,56 @@
 import { ASSETS_PATHS } from "../constants/AssetsPaths";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from 'next/image';
+import React, { useEffect, useRef, useState } from 'react';
+
+function useCountUp(targetNumber: number, shouldStart: boolean, durationMs: number = 1500) {
+    const [currentValue, setCurrentValue] = useState<number>(0);
+    const animationFrameRef = useRef<number | null>(null);
+    const startTimeRef = useRef<number | null>(null);
+
+    useEffect(() => {
+        if (!shouldStart) return;
+
+        function step(timestamp: number) {
+            if (startTimeRef.current === null) startTimeRef.current = timestamp;
+            const elapsed = timestamp - (startTimeRef.current || 0);
+            const progress = Math.min(elapsed / durationMs, 1);
+            const easedProgress = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+            const value = Math.floor(easedProgress * targetNumber);
+            setCurrentValue(value);
+            if (progress < 1) {
+                animationFrameRef.current = requestAnimationFrame(step);
+            } else {
+                setCurrentValue(targetNumber);
+            }
+        }
+
+        animationFrameRef.current = requestAnimationFrame(step);
+        return () => {
+            if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+            animationFrameRef.current = null;
+            startTimeRef.current = null;
+        };
+    }, [shouldStart, targetNumber, durationMs]);
+
+    return currentValue;
+}
+
+function CountUpText({ value, start }: { value: string; start: boolean }) {
+    const match = value.match(/^(\d+(?:\.\d+)?)(.*)$/);
+    const numericPart = match ? parseFloat(match[1]) : 0;
+    const suffix = match ? match[2] : '';
+    const animated = useCountUp(Math.round(numericPart), start);
+    return <>{start ? `${animated}${suffix}` : value}</>;
+}
 
 export default function About() {
     const { translations } = useLanguage();
 
     const stats = [
-        { number: "500+", label: translations?.about?.stats?.students || "طالب" },
-        { number: "50+", label: translations?.about?.stats?.teachers || "معلم" },
-        { number: "15+", label: translations?.about?.stats?.years || "سنة خبرة" },
-        { number: "20+", label: translations?.about?.stats?.programs || "برنامج" }
+        { number: "2000+", label: translations?.about?.stats?.students || "طالب" },
+        { number: "100+", label: translations?.about?.stats?.teachers || "معلم" },
+        { number: "20+", label: translations?.about?.stats?.years || "سنة خبرة" },
     ];
 
     return (
@@ -105,24 +146,48 @@ export default function About() {
                 </div>
 
                 {/* الإحصائيات */}
-                <div className="bg-[#B33791] rounded-3xl p-12 text-white">
-                
-                    
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                        {stats.map((stat, index) => (
-                            <div key={index} className="text-center">
-                                <div className="text-4xl md:text-5xl font-bold mb-2 font-cairo">
-                                    {stat.number}
-                                </div>
-                                <div className="text-lg font-cairo opacity-90">
-                                    {stat.label}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                <StatsSection stats={stats} />
             </div>
         </section>
+    );
+}
+
+function StatsSection({ stats }: { stats: { number: string; label: string }[] }) {
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const [start, setStart] = useState(false);
+
+    useEffect(() => {
+        if (!containerRef.current) return;
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setStart(true);
+                        observer.disconnect();
+                    }
+                });
+            },
+            { threshold: 0.3 }
+        );
+        observer.observe(containerRef.current);
+        return () => observer.disconnect();
+    }, []);
+
+    return (
+        <div ref={containerRef} className="bg-[#B33791] rounded-3xl p-12 text-white">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {stats.map((stat, index) => (
+                    <div key={index} className="text-center">
+                        <div className="text-4xl md:text-5xl font-bold mb-2 font-cairo">
+                            <CountUpText value={stat.number} start={start} />
+                        </div>
+                        <div className="text-lg font-cairo opacity-90">
+                            {stat.label}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 }
 
