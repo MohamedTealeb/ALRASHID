@@ -16,17 +16,8 @@ export default function Academic() {
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-[#B33791] font-cairo mb-6">
                             {translations?.academic?.title || "الأساس الضروري للتفوق الأكاديمي"}
                         </h1>
-                        <p className="text-lg md:text-xl text-gray-700 font-cairo mb-10 max-w-2xl mx-auto lg:mx-0">
-                            {translations?.academic?.subtitle || "اختر أفضل الدورات المخصصة للتفوق الأكاديمي والاستعداد للاختبارات"}
-                        </p>
-                        <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6">
-                            <button className="bg-[#B33791] hover:bg-[#a02e80] text-white px-8 py-4 rounded-full text-lg font-bold shadow-lg transition-all duration-300 transform hover:scale-105 font-cairo">
-                                {translations?.academic?.primaryCta || "استكشاف الدورات"}
-                            </button>
-                            <button className="border-2 border-[#B33791] text-[#B33791] hover:bg-[#B33791] hover:text-white px-8 py-4 rounded-full text-lg font-bold transition-all duration-300 font-cairo">
-                                {translations?.academic?.secondaryCta || "تسجيل الطلاب"}
-                            </button>
-                        </div>
+                      
+                        
                     </div>
                     
                     {/* الصورة */}

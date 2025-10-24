@@ -1,9 +1,23 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ASSETS_PATHS } from "../constants/AssetsPaths";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
+import { useImage } from './../../hooks/use-image';
+
+// Define proper types for the image data
+interface ImageData {
+  imageUrl: string;
+  id?: string;
+  title?: string;
+  description?: string;
+}
+
+interface ImagesResponse {
+  data: {
+    images: ImageData[];
+  };
+}
 
 export default function Slider() {
   const { translations, language } = useLanguage();
@@ -11,27 +25,10 @@ export default function Slider() {
   const [mounted, setMounted] = useState(false);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
+  const { data: imagesData } = useImage();
 
-  const images = [
-    { src: ASSETS_PATHS.img_Slider4, alt: "img4" },
-    { src: ASSETS_PATHS.img_Slider5, alt: "img5" },
-    { src: ASSETS_PATHS.img_Slider6, alt: "img6" },
-    { src: ASSETS_PATHS.img_Slider7, alt: "img7" },
-    { src: ASSETS_PATHS.img_Slider8, alt: "img8" },
-    { src: ASSETS_PATHS.img_Slider9, alt: "img9" },
-    { src: ASSETS_PATHS.img_Slider10, alt: "img10" },
-    { src: ASSETS_PATHS.img_Slider11, alt: "img11" },
-    { src: ASSETS_PATHS.img_Slider12, alt: "img12" },
-    { src: ASSETS_PATHS.img_Slider13, alt: "img13" },
-    { src: ASSETS_PATHS.img_Slider14, alt: "img14" },
-    { src: ASSETS_PATHS.img_Slider15, alt: "img15" },
-    { src: ASSETS_PATHS.img_Slider1, alt: "img1" },
-    { src: ASSETS_PATHS.img_Slider2, alt: "img2" },
-    { src: ASSETS_PATHS.img_Slider3, alt: "img3" },
-
-  ];
-
-  const total = images.length;
+  const images = imagesData?.data?.images || [];
+  const total = images?.length || 0;
   const autoSlideInterval = 4000; // 4 ثوان
 
   useEffect(() => {
@@ -61,7 +58,7 @@ export default function Slider() {
     return () => clearInterval(interval);
   }, [mounted, isAutoPlaying, total, autoSlideInterval, current]);
 
-  if (!mounted) return null;
+  if (!mounted || total === 0) return null;
 
   const nextSlide = () => setCurrent((prev) => (prev + 1) % total);
   const prevSlide = () => setCurrent((prev) => (prev - 1 + total) % total);
@@ -93,13 +90,15 @@ export default function Slider() {
                 transform: `translateX(${language === "ar" ? current * 100 : -current * 100}%)`,
               }}
             >
-              {images.map((img, idx) => (
+              {images?.map((img: ImageData, idx: number) => (
                 <div key={idx} className="flex-none w-full h-full relative group">
                   <Image
-                    src={img.src}
-                    alt={img.alt}
+                    src={`${process.env.NEXT_PUBLIC_API_BASE}${img.imageUrl}`}
+                    alt={`img${idx + 1}`}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={idx === 0}
                   />
                   {/* طبقة تظليل مع تأثير fade */}
                   
@@ -166,7 +165,7 @@ export default function Slider() {
 
           {/* مؤشرات الصفحات مع مؤشر التقدم */}
           <div className="flex justify-center mt-8 space-x-3">
-            {images.map((_, idx) => (
+            {images?.map((img: ImageData, idx: number) => (
               <div key={idx} className="relative">
                 <button
                   onClick={() => setCurrent(idx)}

@@ -1,6 +1,6 @@
 "use client";
 import { ASSETS_PATHS } from "../constants/AssetsPaths";
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaYoutube, FaTelegram } from "react-icons/fa";
 import { useLanguage } from '@/contexts/LanguageContext';
 import Image from 'next/image';
 
@@ -30,14 +30,11 @@ export default function Footer() {
                             <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" href="#" aria-label="Facebook">
                                 <FaFacebookF size={16} />
                             </a>
-                            <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" href="#" aria-label="Twitter">
-                                <FaTwitter size={16} />
-                            </a>
                             <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" href="#" aria-label="Instagram">
                                 <FaInstagram size={16} />
                             </a>
-                            <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" href="#" aria-label="LinkedIn">
-                                <FaLinkedin size={16} />
+                            <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" href="#" aria-label="Telegram">
+                                <FaTelegram size={16} />
                             </a>
                             <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" href="#" aria-label="YouTube">
                                 <FaYoutube size={16} />
@@ -87,9 +84,9 @@ export default function Footer() {
                                 <div>
                                     <p className="text-gray-600 font-cairo text-sm">
                                         <span className="block text-[#B33791] font-semibold">{translations.footer?.contact?.phone || "الهاتف"}</span>
-                                        +96551735171                                    </p>
+                                        96551735171+                                    </p>
                                     <p className="text-gray-600 font-cairo text-sm">
-                                    +96555328677                                    </p>
+                                    96555328677+                                    </p>
                                 </div>
                             </div>
                         </div>

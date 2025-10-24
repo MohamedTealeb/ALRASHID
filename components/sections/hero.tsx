@@ -27,7 +27,7 @@ export default function Hero() {
 
       {/* المحتوى */}
       <div className="relative z-10 text-center px-6 md:px-12 text-white drop-shadow-lg">
-        <h1 className="text-4xl md:text-7xl font-extrabold mb-6 leading-tight text-[#B33791] font-cairo">
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight text-[#B33791] font-cairo">
           {translations?.Hero.title || "مدرسة الراشد الهندية"}
         </h1>
         <p className="text-lg md:text-2xl mb-10 text-gray-100 font-cairo">
