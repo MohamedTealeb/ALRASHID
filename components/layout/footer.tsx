@@ -48,11 +48,10 @@ export default function Footer() {
                             {translations.footer?.links?.title || "روابط سريعة"}
                         </h4>
                         <ul className="space-y-3">
-                            <li><a className="text-gray-600 hover:text-[#B33791] font-cairo transition-colors duration-300" href="#">{translations.footer?.links?.about || "من نحن"}</a></li>
-                            <li><a className="text-gray-600 hover:text-[#B33791] font-cairo transition-colors duration-300" href="#">{translations.footer?.links?.courses || "الدورات"}</a></li>
-                            <li><a className="text-gray-600 hover:text-[#B33791] font-cairo transition-colors duration-300" href="#">{translations.footer?.links?.contact || "تواصل معنا"}</a></li>
-                            <li><a className="text-gray-600 hover:text-[#B33791] font-cairo transition-colors duration-300" href="#">{translations.footer?.links?.privacy || "سياسة الخصوصية"}</a></li>
-                            <li><a className="text-gray-600 hover:text-[#B33791] font-cairo transition-colors duration-300" href="#">{translations.footer?.links?.terms || "شروط الخدمة"}</a></li>
+                            <li><a className="text-gray-600 hover:text-[#B33791] font-cairo transition-colors duration-300" href="#about">{translations.footer?.links?.about || "من نحن"}</a></li>
+                            <li><a className="text-gray-600 hover:text-[#B33791] font-cairo transition-colors duration-300" href="/en/contact">{translations.footer?.links?.contact || "تواصل معنا"}</a></li>
+                            <li><a className="text-gray-600 hover:text-[#B33791] font-cairo transition-colors duration-300" href="#academic">{translations.footer?.links?.academic || "الاكاديمية"}</a></li>
+                            <li><a className="text-gray-600 hover:text-[#B33791] font-cairo transition-colors duration-300" href="#slider">{translations.footer?.links?.terms || "شروط الخدمة"}</a></li>
                         </ul>
                     </div>
 

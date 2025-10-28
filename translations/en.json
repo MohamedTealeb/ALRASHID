@@ -153,10 +153,10 @@
     "links": {
       "title": "Quick Links",
       "about": "About",
-      "courses": "Courses",
+      
       "contact": "Contact",
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Service"
+      "academic": "Academic",
+      "terms": "Activities"
     },
     "contact": {
       "title": "Contact Information",
@@ -175,5 +175,24 @@
       "designBy": "Designed with ❤️ for Excellence in Education"
     },
     "copyright": "All rights reserved."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "namePlaceholder": "Enter your name",
+    "emailPlaceholder": "example@email.com",
+    "phonePlaceholder": "05xxxxxxxx",
+    "submit": "Send",
+    "submitting": "Sending...",
+    "success": "Your details have been sent successfully.",
+    "errors": {
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email format",
+      "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Invalid phone number format"
+    }
   }
 }

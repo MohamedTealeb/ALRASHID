@@ -153,10 +153,9 @@
     "links": {
       "title": "روابط سريعة",
       "about": "من نحن",
-      "courses": "الدورات",
       "contact": "تواصل معنا",
-      "privacy": "سياسة الخصوصية",
-      "terms": "شروط الخدمة"
+      "academic": "الاكاديمية",
+      "terms": "الانشطة "
     },
     "contact": {
       "title": "معلومات التواصل",
@@ -175,5 +174,24 @@
       "designBy": "مصمم بـ ❤️ للتعليم المتميز"
     },
     "copyright": "جميع الحقوق محفوظة."
+  },
+  "contact": {
+    "title": "تواصل معنا",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "namePlaceholder": "ادخل اسمك",
+    "emailPlaceholder": "example@email.com",
+    "phonePlaceholder": "05xxxxxxxx",
+    "submit": "إرسال",
+    "submitting": "جارٍ الإرسال...",
+    "success": "تم إرسال بياناتك بنجاح.",
+    "errors": {
+      "nameRequired": "الاسم مطلوب",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "صيغة بريد إلكتروني غير صحيحة",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "phoneInvalid": "صيغة رقم هاتف غير صحيحة"
+    }
   }
 }
