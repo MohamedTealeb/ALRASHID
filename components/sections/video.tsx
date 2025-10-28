@@ -61,12 +61,7 @@ export default function Video() {
                                 </svg>
                                 <span>{translations?.video?.features?.educationalContent || "محتوى تعليمي"}</span>
                             </div>
-                            <div className="flex items-center space-x-2">
-                                <svg className="w-5 h-5 text-[#B33791]" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/>
-                                </svg>
-                                <span>{translations?.video?.features?.free || "مجاني"}</span>
-                            </div>
+                          
                         </div>
                     </div>
                 </div>
