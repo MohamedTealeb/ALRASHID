@@ -3,6 +3,7 @@
 import { ASSETS_PATHS } from './../constants/AssetsPaths';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Hero() {
   const { translations } = useLanguage();
@@ -33,9 +34,11 @@ export default function Hero() {
         <p className="text-lg md:text-2xl mb-10 text-gray-100 font-cairo">
           {translations?.Hero.subtitle || "نرحب بكم في رحلتنا التعليمية المتميزة حيث نغرس القيم والتميز الأكاديمي"}
         </p>
+        <Link href="/en/contact">
         <button className="bg-[#B33791] hover:bg-[#a02e80] text-white px-10 py-4 rounded-full text-lg font-bold shadow-lg transition-transform transform hover:scale-105 font-cairo">
           {translations?.Hero.cta || "اكتشف المزيد"}
         </button>
+        </Link>
       </div>
 
       {/* منحنى سفلي بسيط */}
