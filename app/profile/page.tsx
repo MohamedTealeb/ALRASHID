@@ -241,7 +241,6 @@ export default function ProfilePage() {
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600 font-cairo">
                       <span><strong>{language === "ar" ? "السنة الدراسية:" : "Academic Year:"}</strong> {result.yearId}</span>
-                      <span><strong>{language === "ar" ? "الفصل:" : "Class:"}</strong> {result.className}</span>
                       <span><strong>{language === "ar" ? "القسم:" : "Division:"}</strong> {result.division || "N/A"}</span>
                       <span><strong>{language === "ar" ? "الرقم المدني:" : "Civil ID:"}</strong> {result.civilId}</span>
                     </div>
