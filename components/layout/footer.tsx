@@ -6,6 +6,8 @@ import Image from 'next/image';
 
 export default function Footer() {
     const { translations } = useLanguage();
+    const { language } = useLanguage();
+    const isRTL = language === 'ar';
     
     return (
         <footer className="bg-white border-t border-gray-200 text-gray-900">
@@ -27,16 +29,16 @@ export default function Footer() {
                         
                         {/* وسائل التواصل الاجتماعي */}
                         <div className="flex gap-3">
-                            <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" href="#" aria-label="Facebook">
+                            <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" target="_blank" href="https://www.facebook.com/share/1Jm9kc8odr/?mibextid=wwXIfr" aria-label="Facebook">
                                 <FaFacebookF size={16} />
                             </a>
-                            <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" href="#" aria-label="Instagram">
+                            <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" target="_blank" href="https://www.instagram.com/alrashid.indian.school?igsh=MXE3bTg5OTVjNXl1bg%3D%3D&utm_source=qr" aria-label="Instagram">
                                 <FaInstagram size={16} />
                             </a>
-                            <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" href="#" aria-label="Telegram">
+                            <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" target="_blank" href="https://t.me/alrashid99" aria-label="Telegram">
                                 <FaTelegram size={16} />
                             </a>
-                            <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" href="#" aria-label="YouTube">
+                            <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" target="_blank" href="https://www.youtube.com" aria-label="YouTube">
                                 <FaYoutube size={16} />
                             </a>
                         </div>
@@ -83,9 +85,11 @@ export default function Footer() {
                                 <div>
                                     <p className="text-gray-600 font-cairo text-sm">
                                         <span className="block text-[#B33791] font-semibold">{translations.footer?.contact?.phone || "الهاتف"}</span>
-                                        96551735171+                                    </p>
+                                        { isRTL ? "96551735171+" : "+96551735171" }
+                                    </p>
                                     <p className="text-gray-600 font-cairo text-sm">
-                                    96555328677+                                    </p>
+                                        { isRTL ? "96555328677+" : "+96555328677" }
+                                    </p>
                                 </div>
                             </div>
                         </div>
