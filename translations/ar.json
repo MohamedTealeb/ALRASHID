@@ -176,22 +176,41 @@
     "copyright": "جميع الحقوق محفوظة."
   },
   "contact": {
-    "title": "تواصل معنا",
-    "name": "الاسم",
-    "email": "البريد الإلكتروني",
-    "phone": "رقم الهاتف",
-    "namePlaceholder": "ادخل اسمك",
-    "emailPlaceholder": "example@email.com",
-    "phonePlaceholder": "05xxxxxxxx",
+    "title": "التقديم والبيانات",
     "submit": "إرسال",
-    "submitting": "جارٍ الإرسال...",
-    "success": "تم إرسال بياناتك بنجاح.",
+    "submitting": "جاري الإرسال...",
+    "success": "تم إرسال البيانات بنجاح.",
+    "formspreeEndpoint": "",
+    "fields": {
+      "appliedClass": { "label": "الصف المتقدم له", "placeholder": "مثال: الصف الأول" },
+      "studentCivilId": { "label": "رقم مدني الطالب", "placeholder": "مثال: 123456789012" },
+      "studentName": { "label": "اسم الطالب", "placeholder": "أدخل اسم الطالب" },
+      "nationality": { "label": "الجنسية", "placeholder": "أدخل الجنسية" },
+      "guardianName": { "label": "اسم ولي الأمر", "placeholder": "أدخل اسم ولي الأمر" },
+      "fatherCivilId": { "label": "رقم مدني الاب", "placeholder": "مثال: 123456789012" },
+      "birthDate": { "label": "تاريخ الميلاد" },
+      "residencyExpiry": { "label": "تاريخ انتهاء الاقامة" },
+      "passportNumber": { "label": "رقم جواز سفر الطالب", "placeholder": "أدخل رقم الجواز" },
+      "passportExpiry": { "label": "تاريخ انتهاء جواز السفر" },
+      "photo": { "label": "اضافة صوره شخصي للطالب خلفية زرقاء" },
+      "specialNeeds": { "label": "هل الطفل يندرج تحت الحالات الخاصه" },
+      "agreement": { "label": "اقر بأن جميع البيانات المدخلة صحيحة" }
+    },
     "errors": {
-      "nameRequired": "الاسم مطلوب",
-      "emailRequired": "البريد الإلكتروني مطلوب",
-      "emailInvalid": "صيغة بريد إلكتروني غير صحيحة",
-      "phoneRequired": "رقم الهاتف مطلوب",
-      "phoneInvalid": "صيغة رقم هاتف غير صحيحة"
+      "appliedClassRequired": "الرجاء إدخال الصف المتقدم له",
+      "studentCivilIdRequired": "الرجاء إدخال رقم مدني الطالب",
+      "studentNameRequired": "الرجاء إدخال اسم الطالب",
+      "nationalityRequired": "الرجاء إدخال الجنسية",
+      "guardianNameRequired": "الرجاء إدخال اسم ولي الأمر",
+      "fatherCivilIdRequired": "الرجاء إدخال رقم مدني الأب",
+      "birthDateRequired": "الرجاء إدخال تاريخ الميلاد",
+      "residencyExpiryRequired": "الرجاء إدخال تاريخ انتهاء الإقامة",
+      "passportNumberRequired": "الرجاء إدخال رقم جواز السفر",
+      "passportExpiryRequired": "الرجاء إدخال تاريخ انتهاء الجواز",
+      "photoRequired": "الرجاء رفع صورة شخصية بخلفية زرقاء",
+      "specialNeedsRequired": "الرجاء اختيار نعم أو لا",
+      "agreementRequired": "يجب الإقرار بصحة البيانات",
+      "submitFailed": "حدث خطأ أثناء الإرسال، حاول مرة أخرى."
     }
   }
 }

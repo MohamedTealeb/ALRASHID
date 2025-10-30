@@ -177,22 +177,47 @@
     "copyright": "All rights reserved."
   },
   "contact": {
-    "title": "Contact Us",
-    "name": "Name",
-    "email": "Email",
-    "phone": "Phone",
-    "namePlaceholder": "Enter your name",
-    "emailPlaceholder": "example@email.com",
-    "phonePlaceholder": "05xxxxxxxx",
+    "title": "Application & Details",
     "submit": "Send",
     "submitting": "Sending...",
-    "success": "Your details have been sent successfully.",
+    "success": "Submitted successfully.",
+    "formspreeEndpoint": "",
+    "fields": {
+      "appliedClass": { "label": "Applied Class", "placeholder": "e.g., Grade 1" },
+      "studentCivilId": { "label": "Student Civil ID", "placeholder": "e.g., 123456789012" },
+      "studentName": { "label": "Student Name", "placeholder": "Enter student name" },
+      "nationality": { "label": "Nationality", "placeholder": "Enter nationality" },
+      "guardianName": { "label": "Guardian Name", "placeholder": "Enter guardian name" },
+      "fatherCivilId": { "label": "Father Civil ID", "placeholder": "e.g., 123456789012" },
+      "birthDate": { "label": "Date of Birth" },
+      "residencyExpiry": { "label": "Residency Expiry" },
+      "passportNumber": { "label": "Student Passport No.", "placeholder": "Enter passport number" },
+      "passportExpiry": { "label": "Passport Expiry" },
+      "photo": { "label": "Upload student photo (blue background)" },
+      "specialNeeds": { "label": "Does the child fall under special needs?" },
+      "agreement": { "label": "I confirm all entered data are correct" }
+    },
     "errors": {
-      "nameRequired": "Name is required",
-      "emailRequired": "Email is required",
-      "emailInvalid": "Invalid email format",
-      "phoneRequired": "Phone number is required",
-      "phoneInvalid": "Invalid phone number format"
+      "appliedClassRequired": "Applied class is required",
+      "studentCivilIdRequired": "Student civil ID is required",
+      "studentNameRequired": "Student name is required",
+      "nationalityRequired": "Nationality is required",
+      "guardianNameRequired": "Guardian name is required",
+      "fatherCivilIdRequired": "Father civil ID is required",
+      "birthDateRequired": "Date of birth is required",
+      "residencyExpiryRequired": "Residency expiry is required",
+      "passportNumberRequired": "Passport number is required",
+      "passportExpiryRequired": "Passport expiry is required",
+      "photoRequired": "Photo is required",
+      "specialNeedsRequired": "Please choose Yes or No",
+      "agreementRequired": "You must confirm the data is correct",
+      "submitFailed": "Submission failed, please try again."
     }
+  },
+  "common": {
+    "loading": "Loading...",
+    "language": "Language",
+    "yes": "Yes",
+    "no": "No"
   }
 }
