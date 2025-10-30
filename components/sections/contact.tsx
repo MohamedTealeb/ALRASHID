@@ -37,8 +37,8 @@ interface FormErrors {
 
 export default function Contact() {
     const { translations } = useLanguage();
-    const t = (translations as any)?.contact || {};
-    const c = (translations as any)?.common || {};
+    const t = translations.contact;
+    const c = translations.common as { [key: string]: string };
     const [form, setForm] = useState<ContactFormState>({
         appliedClass: "",
         studentCivilId: "",
