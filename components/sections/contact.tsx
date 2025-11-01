@@ -19,7 +19,6 @@ interface ContactFormState {
     residencyExpiry: string; // تاريخ انتهاء الاقامه (yyyy-mm-dd)
     passportNumber: string; // رقم جواز سفر الطالب
     passportExpiry: string; // تاريخ انتهاء جواز السفر (yyyy-mm-dd)
-    photo: File | null; // صورة شخصية خلفية زرقاء
     specialNeeds: boolean | null; // هل الطفل يندرج تحت الحالات الخاصة
     hasSiblings: boolean | null; // هل للطالب أخ أو أخت بالمدرسة
     siblings: Sibling[]; // بيانات الأخوة
@@ -37,7 +36,6 @@ interface FormErrors {
     residencyExpiry?: string;
     passportNumber?: string;
     passportExpiry?: string;
-    photo?: string;
     specialNeeds?: string;
     hasSiblings?: string;
     siblings?: string;
@@ -59,7 +57,6 @@ export default function Contact() {
         residencyExpiry: "",
         passportNumber: "",
         passportExpiry: "",
-        photo: null,
         specialNeeds: null,
         hasSiblings: null,
         siblings: [],
@@ -82,7 +79,6 @@ export default function Contact() {
         if (!values.residencyExpiry) newErrors.residencyExpiry = t?.errors?.residencyExpiryRequired || "الرجاء إدخال تاريخ انتهاء الإقامة";
         if (!values.passportNumber.trim()) newErrors.passportNumber = t?.errors?.passportNumberRequired || "الرجاء إدخال رقم جواز السفر";
         if (!values.passportExpiry) newErrors.passportExpiry = t?.errors?.passportExpiryRequired || "الرجاء إدخال تاريخ انتهاء الجواز";
-        if (!values.photo) newErrors.photo = t?.errors?.photoRequired || "الرجاء رفع صورة شخصية بخلفية زرقاء";
         if (values.specialNeeds === null) newErrors.specialNeeds = t?.errors?.specialNeedsRequired || "الرجاء اختيار نعم أو لا";
         if (values.hasSiblings === null) {
             const errorsObj = t?.errors as Record<string, string> | undefined;
@@ -113,13 +109,6 @@ export default function Contact() {
         }
     };
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files && e.target.files[0] ? e.target.files[0] : null;
-        setForm((prev) => ({ ...prev, photo: file }));
-        if (errors.photo) {
-            setErrors((prev) => ({ ...prev, photo: undefined }));
-        }
-    };
 
     const addSibling = () => {
         setForm((prev) => ({
@@ -159,6 +148,7 @@ export default function Contact() {
         try {
             setIsSubmitting(true);
             setSubmitError(null);
+            setSubmitted(false);
             const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || t?.formspreeEndpoint;
             if (!endpoint) {
                 throw new Error("Form endpoint not configured");
@@ -179,16 +169,23 @@ export default function Contact() {
             formData.append("hasSiblings", String(form.hasSiblings));
             formData.append("siblings", JSON.stringify(form.siblings));
             formData.append("agreement", String(form.agreement));
-            if (form.photo) formData.append("photo", form.photo);
 
             const resp = await fetch(endpoint, {
                 method: "POST",
                 body: formData,
+                redirect: 'manual', // منع إعادة التوجيه التلقائية لتجنب مشكلة CORS
             });
-            if (!resp.ok) {
-                throw new Error("Failed to submit");
+
+            // Formspree يعيد status 302 أو 200 عند النجاح
+            // نحن نعتبر أي status code أقل من 400 نجاح
+            if (resp.status >= 400) {
+                const errorText = await resp.text().catch(() => '');
+                throw new Error(`فشل الإرسال: ${resp.status} ${resp.statusText}`);
             }
+
+            // نجح الإرسال
             setSubmitted(true);
+            setSubmitError(null);
             setForm({
                 appliedClass: "",
                 studentCivilId: "",
@@ -200,12 +197,20 @@ export default function Contact() {
                 residencyExpiry: "",
                 passportNumber: "",
                 passportExpiry: "",
-                photo: null,
                 specialNeeds: null,
                 hasSiblings: null,
                 siblings: [],
                 agreement: false,
             });
+        } catch (error) {
+            // معالجة الأخطاء
+            const errorMessage = error instanceof Error 
+                ? error.message 
+                : t?.errors?.submitFailed || "حدث خطأ أثناء الإرسال، حاول مرة أخرى.";
+            
+            setSubmitError(errorMessage);
+            setSubmitted(false);
+            console.error("Form submission error:", error);
         } finally {
             setIsSubmitting(false);
         }
@@ -217,7 +222,7 @@ export default function Contact() {
                 <h2 className="text-3xl md:text-4xl font-bold text-[#B33791] font-cairo mb-8 text-center">
                     {t?.title || "التقديم والبيانات"}
                 </h2>
-                <form onSubmit={handleSubmit} className="space-y-6 bg-gray-50 p-6 md:p-8 rounded-2xl shadow" dir="rtl">
+                <form onSubmit={handleSubmit} method="POST" className="space-y-6 bg-gray-50 p-6 md:p-8 rounded-2xl shadow" dir="rtl">
                     <div>
                         <label htmlFor="appliedClass" className="block mb-2 font-medium text-gray-700">{t?.fields?.appliedClass?.label || "الصف المتقدم له"}</label>
                         <input
@@ -374,21 +379,6 @@ export default function Contact() {
                             aria-describedby={errors.passportExpiry ? "passportExpiry-error" : undefined}
                         />
                         {errors.passportExpiry && <p id="passportExpiry-error" className="mt-2 text-sm text-red-600">{errors.passportExpiry}</p>}
-                    </div>
-
-                    <div>
-                        <label className="block mb-2 font-medium text-gray-700">{t?.fields?.photo?.label || "اضافة صوره شخصي للطالب خلفية زرقاء"}</label>
-                        <input
-                            id="photo"
-                            name="photo"
-                            type="file"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                            className={`w-full rounded-lg border px-4 py-2 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#B33791] file:text-white hover:file:bg-[#a02c82] ${errors.photo ? "border-red-400" : "border-gray-300"}`}
-                            aria-invalid={Boolean(errors.photo)}
-                            aria-describedby={errors.photo ? "photo-error" : undefined}
-                        />
-                        {errors.photo && <p id="photo-error" className="mt-2 text-sm text-red-600">{errors.photo}</p>}
                     </div>
 
                     <div>
@@ -557,10 +547,16 @@ export default function Contact() {
                     </button>
 
                     {submitError && (
-                        <p className="text-red-600 text-center">{t?.errors?.submitFailed || "حدث خطأ أثناء الإرسال، حاول مرة أخرى."}</p>
+                        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+                            <p className="text-red-600 font-medium">{submitError}</p>
+                            <p className="text-red-500 text-sm mt-1">{t?.errors?.submitFailed || "يرجى المحاولة مرة أخرى."}</p>
+                        </div>
                     )}
                     {submitted && (
-                        <p className="text-green-600 text-center">{t?.success || "تم إرسال البيانات بنجاح."}</p>
+                        <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                            <p className="text-green-600 font-medium text-lg">{t?.success || "تم إرسال البيانات بنجاح."}</p>
+                            <p className="text-green-500 text-sm mt-1">شكراً لك على تقديمك!</p>
+                        </div>
                     )}
                 </form>
             </div>
