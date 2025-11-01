@@ -172,6 +172,10 @@
       "weekendTime": "مغلق",
       "note": "أوقات العمل قد تختلف في الإجازات الرسمية"
     },
+    "teams": {
+      "title": "دخول منصة التيمز اضغط هنا",
+      "alt": "Microsoft Teams"
+    },
     "bottom": {
       "designBy": "مصمم بـ ❤️ للتعليم المتميز"
     },
@@ -196,6 +200,17 @@
       "passportExpiry": { "label": "تاريخ انتهاء جواز السفر" },
       "photo": { "label": "اضافة صوره شخصي للطالب خلفية زرقاء" },
       "specialNeeds": { "label": "هل الطفل يندرج تحت الحالات الخاصه" },
+      "hasSiblings": { "label": "هل للطالب أخ أو أخت بالمدرسة؟" },
+      "siblings": {
+        "title": "بيانات الأخوة",
+        "siblingLabel": "أخ/أخت",
+        "nameLabel": "الاسم",
+        "classLabel": "الصف",
+        "namePlaceholder": "أدخل الاسم",
+        "classPlaceholder": "أدخل الصف",
+        "addButton": "+ إضافة أخ/أخت",
+        "removeButton": "حذف"
+      },
       "agreement": { "label": "اقر بأن جميع البيانات المدخلة صحيحة" }
     },
     "errors": {
@@ -211,6 +226,9 @@
       "passportExpiryRequired": "الرجاء إدخال تاريخ انتهاء الجواز",
       "photoRequired": "الرجاء رفع صورة شخصية بخلفية زرقاء",
       "specialNeedsRequired": "الرجاء اختيار نعم أو لا",
+      "hasSiblingsRequired": "الرجاء اختيار نعم أو لا",
+      "siblingsRequired": "الرجاء إضافة بيانات الأخ أو الأخت",
+      "siblingInfoRequired": "الرجاء إدخال الاسم والصف لجميع الأخوة",
       "agreementRequired": "يجب الإقرار بصحة البيانات",
       "submitFailed": "حدث خطأ أثناء الإرسال، حاول مرة أخرى."
     }

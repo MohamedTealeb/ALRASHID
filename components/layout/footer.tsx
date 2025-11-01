@@ -28,7 +28,7 @@ export default function Footer() {
                         </p>
                         
                         {/* وسائل التواصل الاجتماعي */}
-                        <div className="flex gap-3">
+                        <div className="flex gap-3 mb-4">
                             <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" target="_blank" href="https://www.facebook.com/share/1Jm9kc8odr/?mibextid=wwXIfr" aria-label="Facebook">
                                 <FaFacebookF size={16} />
                             </a>
@@ -40,6 +40,27 @@ export default function Footer() {
                             </a>
                             <a className="w-10 h-10 rounded-full bg-[#B33791]/20 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110" target="_blank" href="https://www.youtube.com" aria-label="YouTube">
                                 <FaYoutube size={16} />
+                            </a>
+                        </div>
+                        
+                        {/* رابط Microsoft Teams */}
+                        <div className="mt-4">
+                            <h4 className="text-base font-bold font-cairo mb-3 text-[#B33791]">
+                                {translations.footer?.teams?.title || "دخول منصة التيمز اضغط هنا"}
+                            </h4>
+                            <a 
+                                className="w-40 h-20 rounded-full bg-[#6264A7] flex items-center justify-center text-white hover:bg-[#4B4D8C] transition-all duration-300 transform hover:scale-110 shadow-lg" 
+                                target="_blank" 
+                                href="https://teams.microsoft.com" 
+                                aria-label="Microsoft Teams"
+                            >
+                                <Image 
+                                    src='/microsoft-teams-svgrepo-com.svg' 
+                                    alt={translations.footer?.teams?.alt || "Microsoft Teams"}
+                                    width={70}
+                                    height={32}
+                                    className="object-contain"
+                                />
                             </a>
                         </div>
                     </div>

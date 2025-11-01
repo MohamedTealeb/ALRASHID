@@ -142,10 +142,6 @@
     "gradePosted": "Grade posted for English essay",
     "classReminder": "Reminder: Science class at 10:00 AM"
   },
-  "common": {
-    "loading": "Loading...",
-    "language": "Language"
-  },
   "footer": {
     "brand": "ALRASHID Indian School",
     "tagline": "We provide exceptional education that instills values and academic excellence in students",
@@ -171,6 +167,10 @@
       "weekendTime": "Closed",
       "note": "Working hours may vary during official holidays"
     },
+    "teams": {
+      "title": "Enter Teams Platform Click Here",
+      "alt": "Microsoft Teams"
+    },
     "bottom": {
       "designBy": "Designed with ❤️ for Excellence in Education"
     },
@@ -195,6 +195,17 @@
       "passportExpiry": { "label": "Passport Expiry" },
       "photo": { "label": "Upload student photo (blue background)" },
       "specialNeeds": { "label": "Does the child fall under special needs?" },
+      "hasSiblings": { "label": "Does the student have a sibling in the school?" },
+      "siblings": {
+        "title": "Siblings Information",
+        "siblingLabel": "Sibling",
+        "nameLabel": "Name",
+        "classLabel": "Class",
+        "namePlaceholder": "Enter name",
+        "classPlaceholder": "Enter class",
+        "addButton": "+ Add Sibling",
+        "removeButton": "Remove"
+      },
       "agreement": { "label": "I confirm all entered data are correct" }
     },
     "errors": {
@@ -210,6 +221,9 @@
       "passportExpiryRequired": "Passport expiry is required",
       "photoRequired": "Photo is required",
       "specialNeedsRequired": "Please choose Yes or No",
+      "hasSiblingsRequired": "Please choose Yes or No",
+      "siblingsRequired": "Please add sibling information",
+      "siblingInfoRequired": "Please enter name and class for all siblings",
       "agreementRequired": "You must confirm the data is correct",
       "submitFailed": "Submission failed, please try again."
     }

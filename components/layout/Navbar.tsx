@@ -122,8 +122,24 @@ export default function Navbar() {
           )}
         </nav>
 
-        {/* Login Button/Profile Icon and Language */}
+        {/* Login Button/Profile Icon, Teams, and Language */}
         <div className="hidden md:flex items-center space-x-4">
+          {/* Microsoft Teams */}
+          <a 
+            className="w-10 h-10 rounded-full border border-[#B33791] bg-[#B33791]/10 flex items-center justify-center text-[#B33791] hover:bg-[#B33791] hover:text-white transition-all duration-300 transform hover:scale-110 shadow-sm" 
+            target="_blank" 
+            href="https://teams.microsoft.com" 
+            aria-label={translations?.footer?.teams?.alt || "Microsoft Teams"}
+            title={translations?.footer?.teams?.title || "دخول منصة التيمز اضغط هنا"}
+          >
+            <Image 
+              src='/microsoft-teams-svgrepo-com.svg' 
+              alt={translations?.footer?.teams?.alt || "Microsoft Teams"}
+              width={20}
+              height={20}
+              className="object-contain"
+            />
+          </a>
           {isAuthenticated ? (
             <Link href="/profile">
               <Button
@@ -220,8 +236,27 @@ export default function Navbar() {
                 )}
               </nav>
 
-              {/* زر تسجيل الدخول/البروفايل واللغة داخل القائمة الجانبية */}
+              {/* زر تسجيل الدخول/البروفايل والتيمز واللغة داخل القائمة الجانبية */}
               <div className="mt-6 flex flex-col space-y-4">
+                {/* Microsoft Teams */}
+                <a 
+                  className="w-full h-12 rounded-full bg-[#6264A7] flex items-center justify-center text-white hover:bg-[#4B4D8C] transition-all duration-300 transform hover:scale-105 shadow-lg gap-2" 
+                  target="_blank" 
+                  href="https://teams.microsoft.com" 
+                  aria-label={translations?.footer?.teams?.alt || "Microsoft Teams"}
+                  onClick={() => setOpen(false)}
+                >
+                  <Image 
+                    src='/microsoft-teams-svgrepo-com.svg' 
+                    alt={translations?.footer?.teams?.alt || "Microsoft Teams"}
+                    width={24}
+                    height={24}
+                    className="object-contain"
+                  />
+                  <span className="font-cairo text-sm">
+                    {translations?.footer?.teams?.title || "دخول منصة التيمز اضغط هنا"}
+                  </span>
+                </a>
                 {isAuthenticated ? (
                   <Link href="/profile" onClick={() => setOpen(false)}>
                     <Button

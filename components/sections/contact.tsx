@@ -3,6 +3,11 @@
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+interface Sibling {
+    name: string;
+    class: string;
+}
+
 interface ContactFormState {
     appliedClass: string; // الصف المتقدم له
     studentCivilId: string; // رقم مدني الطالب
@@ -16,6 +21,8 @@ interface ContactFormState {
     passportExpiry: string; // تاريخ انتهاء جواز السفر (yyyy-mm-dd)
     photo: File | null; // صورة شخصية خلفية زرقاء
     specialNeeds: boolean | null; // هل الطفل يندرج تحت الحالات الخاصة
+    hasSiblings: boolean | null; // هل للطالب أخ أو أخت بالمدرسة
+    siblings: Sibling[]; // بيانات الأخوة
     agreement: boolean; // إقرار صحة البيانات
 }
 
@@ -32,6 +39,8 @@ interface FormErrors {
     passportExpiry?: string;
     photo?: string;
     specialNeeds?: string;
+    hasSiblings?: string;
+    siblings?: string;
     agreement?: string;
 }
 
@@ -52,6 +61,8 @@ export default function Contact() {
         passportExpiry: "",
         photo: null,
         specialNeeds: null,
+        hasSiblings: null,
+        siblings: [],
         agreement: false,
     });
     const [errors, setErrors] = useState<FormErrors>({});
@@ -73,6 +84,22 @@ export default function Contact() {
         if (!values.passportExpiry) newErrors.passportExpiry = t?.errors?.passportExpiryRequired || "الرجاء إدخال تاريخ انتهاء الجواز";
         if (!values.photo) newErrors.photo = t?.errors?.photoRequired || "الرجاء رفع صورة شخصية بخلفية زرقاء";
         if (values.specialNeeds === null) newErrors.specialNeeds = t?.errors?.specialNeedsRequired || "الرجاء اختيار نعم أو لا";
+        if (values.hasSiblings === null) {
+            const errorsObj = t?.errors as Record<string, string> | undefined;
+            newErrors.hasSiblings = errorsObj?.hasSiblingsRequired || "الرجاء اختيار نعم أو لا";
+        }
+        if (values.hasSiblings === true) {
+            const errorsObj = t?.errors as Record<string, string> | undefined;
+            if (values.siblings.length === 0) {
+                newErrors.siblings = errorsObj?.siblingsRequired || "الرجاء إضافة بيانات الأخ أو الأخت";
+            } else {
+                // التحقق من أن جميع الأخوة لديهم اسم وصف
+                const incompleteSibling = values.siblings.find(s => !s.name.trim() || !s.class.trim());
+                if (incompleteSibling) {
+                    newErrors.siblings = errorsObj?.siblingInfoRequired || "الرجاء إدخال الاسم والصف لجميع الأخوة";
+                }
+            }
+        }
         if (!values.agreement) newErrors.agreement = t?.errors?.agreementRequired || "يجب الإقرار بصحة البيانات";
         return newErrors;
     };
@@ -91,6 +118,35 @@ export default function Contact() {
         setForm((prev) => ({ ...prev, photo: file }));
         if (errors.photo) {
             setErrors((prev) => ({ ...prev, photo: undefined }));
+        }
+    };
+
+    const addSibling = () => {
+        setForm((prev) => ({
+            ...prev,
+            siblings: [...prev.siblings, { name: "", class: "" }]
+        }));
+        if (errors.siblings) {
+            setErrors((prev) => ({ ...prev, siblings: undefined }));
+        }
+    };
+
+    const removeSibling = (index: number) => {
+        setForm((prev) => ({
+            ...prev,
+            siblings: prev.siblings.filter((_, i) => i !== index)
+        }));
+    };
+
+    const updateSibling = (index: number, field: keyof Sibling, value: string) => {
+        setForm((prev) => ({
+            ...prev,
+            siblings: prev.siblings.map((sibling, i) =>
+                i === index ? { ...sibling, [field]: value } : sibling
+            )
+        }));
+        if (errors.siblings) {
+            setErrors((prev) => ({ ...prev, siblings: undefined }));
         }
     };
 
@@ -120,6 +176,8 @@ export default function Contact() {
             formData.append("passportNumber", form.passportNumber);
             formData.append("passportExpiry", form.passportExpiry);
             formData.append("specialNeeds", String(form.specialNeeds));
+            formData.append("hasSiblings", String(form.hasSiblings));
+            formData.append("siblings", JSON.stringify(form.siblings));
             formData.append("agreement", String(form.agreement));
             if (form.photo) formData.append("photo", form.photo);
 
@@ -144,6 +202,8 @@ export default function Contact() {
                 passportExpiry: "",
                 photo: null,
                 specialNeeds: null,
+                hasSiblings: null,
+                siblings: [],
                 agreement: false,
             });
         } finally {
@@ -356,6 +416,118 @@ export default function Contact() {
                             </label>
                         </div>
                         {errors.specialNeeds && <p className="mt-2 text-sm text-red-600">{errors.specialNeeds}</p>}
+                    </div>
+
+                    <div>
+                        <span className="block mb-2 font-medium text-gray-700">
+                            {(t?.fields as Record<string, { label?: string }>)?.hasSiblings?.label || "هل للطالب أخ أو أخت بالمدرسة؟"}
+                        </span>
+                        <div className="flex items-center gap-6">
+                            <label className="inline-flex items-center gap-2">
+                                <input
+                                    type="radio"
+                                    name="hasSiblings"
+                                    value="yes"
+                                    checked={form.hasSiblings === true}
+                                    onChange={(e) => {
+                                        const value = e.target.value === "yes";
+                                        setForm((prev) => ({
+                                            ...prev,
+                                            hasSiblings: value,
+                                            siblings: value && prev.siblings.length === 0 ? [{ name: "", class: "" }] : prev.siblings
+                                        }));
+                                        if (errors.hasSiblings || errors.siblings) {
+                                            setErrors((prev) => ({ ...prev, hasSiblings: undefined, siblings: undefined }));
+                                        }
+                                    }}
+                                />
+                                <span>{c?.yes || "نعم"}</span>
+                            </label>
+                            <label className="inline-flex items-center gap-2">
+                                <input
+                                    type="radio"
+                                    name="hasSiblings"
+                                    value="no"
+                                    checked={form.hasSiblings === false}
+                                    onChange={(e) => {
+                                        const value = e.target.value === "yes";
+                                        setForm((prev) => ({
+                                            ...prev,
+                                            hasSiblings: value ? true : false,
+                                            siblings: []
+                                        }));
+                                        if (errors.hasSiblings || errors.siblings) {
+                                            setErrors((prev) => ({ ...prev, hasSiblings: undefined, siblings: undefined }));
+                                        }
+                                    }}
+                                />
+                                <span>{c?.no || "لا"}</span>
+                            </label>
+                        </div>
+                        {errors.hasSiblings && <p className="mt-2 text-sm text-red-600">{errors.hasSiblings}</p>}
+
+                        {form.hasSiblings === true && (
+                            <div className="mt-4 space-y-4">
+                                <div className="flex items-center justify-between mb-3">
+                                    <h4 className="font-medium text-gray-700">
+                                        {(t?.fields as Record<string, { title?: string }>)?.siblings?.title || "بيانات الأخوة"}
+                                    </h4>
+                                    <button
+                                        type="button"
+                                        onClick={addSibling}
+                                        className="text-sm text-[#B33791] hover:text-[#a02c82] font-medium"
+                                    >
+                                        {(t?.fields as Record<string, { addButton?: string }>)?.siblings?.addButton || "+ إضافة أخ/أخت"}
+                                    </button>
+                                </div>
+                                
+                                {form.siblings.map((sibling, index) => (
+                                    <div key={index} className="bg-white p-4 rounded-lg border border-gray-300 space-y-3">
+                                        <div className="flex items-center justify-between mb-2">
+                                            <h5 className="text-sm font-medium text-gray-600">
+                                                {(t?.fields as Record<string, { siblingLabel?: string }>)?.siblings?.siblingLabel || "أخ/أخت"} {index + 1}
+                                            </h5>
+                                            {form.siblings.length > 1 && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => removeSibling(index)}
+                                                    className="text-sm text-red-600 hover:text-red-700"
+                                                >
+                                                    {(t?.fields as Record<string, { removeButton?: string }>)?.siblings?.removeButton || "حذف"}
+                                                </button>
+                                            )}
+                                        </div>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                            <div>
+                                                <label className="block mb-1 text-sm font-medium text-gray-700">
+                                                    {(t?.fields as Record<string, { nameLabel?: string }>)?.siblings?.nameLabel || "الاسم"}
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    value={sibling.name}
+                                                    onChange={(e) => updateSibling(index, "name", e.target.value)}
+                                                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B33791]"
+                                                    placeholder={(t?.fields as Record<string, { namePlaceholder?: string }>)?.siblings?.namePlaceholder || "أدخل الاسم"}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block mb-1 text-sm font-medium text-gray-700">
+                                                    {(t?.fields as Record<string, { classLabel?: string }>)?.siblings?.classLabel || "الصف"}
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    value={sibling.class}
+                                                    onChange={(e) => updateSibling(index, "class", e.target.value)}
+                                                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#B33791]"
+                                                    placeholder={(t?.fields as Record<string, { classPlaceholder?: string }>)?.siblings?.classPlaceholder || "أدخل الصف"}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                                {errors.siblings && <p className="mt-2 text-sm text-red-600">{errors.siblings}</p>}
+                            </div>
+                        )}
                     </div>
 
                     <div className="bg-white rounded-lg p-4 border border-gray-200">
