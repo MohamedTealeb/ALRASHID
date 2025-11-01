@@ -186,6 +186,7 @@
     "submit": "إرسال",
     "submitting": "جاري الإرسال...",
     "success": "تم إرسال البيانات بنجاح.",
+    "thankYou": "شكراً لك على تقديمك!",
     "formspreeEndpoint": "",
     "fields": {
       "appliedClass": { "label": "الصف المتقدم له", "placeholder": "مثال: الصف الأول" },

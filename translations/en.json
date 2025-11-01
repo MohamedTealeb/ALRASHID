@@ -181,6 +181,7 @@
     "submit": "Send",
     "submitting": "Sending...",
     "success": "Submitted successfully.",
+    "thankYou": "Thank you for your submission!",
     "formspreeEndpoint": "",
     "fields": {
       "appliedClass": { "label": "Applied Class", "placeholder": "e.g., Grade 1" },
