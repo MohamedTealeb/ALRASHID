@@ -1,6 +1,7 @@
 'use client';
 
 import { useLanguage } from "@/contexts/LanguageContext";
+import { GraduationCapIcon } from "lucide-react";
 
 // مكونات الأيقونات SVG
 const EarlyYearsIcon = () => (
@@ -47,7 +48,11 @@ export default function AcademicSections() {
             title: translations?.academic?.sections?.secondarySchool?.title || "المدرسة الثانوية",
             description: translations?.academic?.sections?.secondarySchool?.description 
         },
-     
+        {
+            icon: <GraduationCapIcon className="w-16 h-16 text-[#B33791]" />,
+            title: translations?.academic?.sections?.IGCSE?.title || "I G C S E",
+            description: translations?.academic?.sections?.IGCSE?.description 
+        },
     ];
     
     return (
@@ -62,7 +67,7 @@ export default function AcademicSections() {
                     </p>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {sections.map((section, index) => (
                         <div 
                             key={index}

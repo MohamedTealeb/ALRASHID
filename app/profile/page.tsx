@@ -160,7 +160,7 @@ export default function ProfilePage() {
                   {profileData.data.user.studentName}
                 </h2>
                 <p className="text-gray-600 font-cairo">
-                  {language === "ar" ? "اسم الوالد/الوالدة:" : "Parent Name:"} {profileData.data.user.parentName}
+                  {language === "ar" ? "اسم ولي الأمر:" : "Parent Name:"} {profileData.data.user.parentName}
                 </p>
               </div>
               <div className={`text-right ${language === "ar" ? "text-right" : "text-left"} flex-shrink-0`}>

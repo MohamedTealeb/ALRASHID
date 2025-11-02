@@ -92,8 +92,11 @@ export default function Footer() {
                                 </div>
                                 <div>
                                     <p className="text-gray-600 font-cairo text-sm">
+                                        <a href="mailto:info@alrashidschool.com">
+
                                         <span className="block text-[#B33791] font-semibold">{translations.footer?.contact?.email || "البريد الإلكتروني"}</span>
-                                        info@alrashid.edu.sa
+                                        info@alrashidschool.com
+                                        </a>
                                     </p>
                                 </div>
                             </div>

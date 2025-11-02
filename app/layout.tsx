@@ -13,13 +13,6 @@ const cairo = Cairo({
 export const metadata = {
   title: "ALRASHID ",
   description: "ALRASHID INDIAN SCHOOL",
-  icons: {
-    icon: [
-      { url: "/logo.jpg",  type: "image/png" },
-      { url: "/logo.jpg",  type: "image/png" },
-    ],
-    
-  },
 };
 
 export default function RootLayout({ children }:{children:React.ReactNode}) {

@@ -10,7 +10,7 @@
     "activities": "Activities"
   },
   "Hero": {
-    "title": "Welcome to Our Website",
+    "title": "Welcome to Alrashid Indian School",
     "subtitle": "We provide the best services for you.",
     "cta": "Get Started"
   },
@@ -49,12 +49,17 @@
 },
 
       "primarySchool": {
-        "title": "Primary School",
-        "description": "Years 1 to 6"
+        "title": "Primary Stage",
+        "description": "GRADE 1, 2, 3 , 4"
       },
       "secondarySchool": {
-        "title": "Secondary School",
-        "description": "Years 7 to 13"
+        "title": "Intermediate Stage",
+        "description": "GRADE 5, 6, 7 , 8"
+      },
+      "IGCSE": {
+
+        "title":"I G C S E",
+        "description": "GRADE 9, 10, 11 , 12"
       }
     }
   },
@@ -162,7 +167,7 @@
     "workingHours": {
       "title": "Working Hours",
       "weekdays": "Sunday - Thursday",
-      "weekdaysTime": "7:00 AM - 2:00 PM",
+      "weekdaysTime": "7:00 AM - 1:30 PM",
       "weekend": "Friday - Saturday",
       "weekendTime": "Closed",
       "note": "Working hours may vary during official holidays"
