@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { UseEmail } from "@/hooks/use-email";
 
 interface Sibling {
     name: string;
@@ -46,6 +47,7 @@ export default function Contact() {
     const { translations } = useLanguage();
     const t = translations.contact;
     const c = translations.common as { [key: string]: string };
+    const emailMutation = UseEmail();
     const [form, setForm] = useState<ContactFormState>({
         appliedClass: "",
         studentCivilId: "",
@@ -66,6 +68,7 @@ export default function Contact() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
+    const [imageFile, setImageFile] = useState<File | null>(null);
 
     const validate = (values: ContactFormState): FormErrors => {
         const newErrors: FormErrors = {};
@@ -149,11 +152,6 @@ export default function Contact() {
             setIsSubmitting(true);
             setSubmitError(null);
             setSubmitted(false);
-            const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || t?.formspreeEndpoint;
-            if (!endpoint) {
-                throw new Error("Form endpoint not configured");
-            }
-
             const formData = new FormData();
             formData.append("appliedClass", form.appliedClass);
             formData.append("studentCivilId", form.studentCivilId);
@@ -165,25 +163,20 @@ export default function Contact() {
             formData.append("residencyExpiry", form.residencyExpiry);
             formData.append("passportNumber", form.passportNumber);
             formData.append("passportExpiry", form.passportExpiry);
-            formData.append("specialNeeds", String(form.specialNeeds));
-            formData.append("hasSiblings", String(form.hasSiblings));
-            formData.append("siblings", JSON.stringify(form.siblings));
-            formData.append("agreement", String(form.agreement));
-
-            const resp = await fetch(endpoint, {
-                method: "POST",
-                body: formData,
-                redirect: 'manual', // منع إعادة التوجيه التلقائية لتجنب مشكلة CORS
+            formData.append("specialNeeds", form.specialNeeds ? "1" : "0");
+            formData.append("hasSiblings", form.hasSiblings ? "1" : "0");
+            form.siblings.forEach((sibling, index) => {
+                formData.append(`siblings[${index}][name]`, sibling.name);
+                formData.append(`siblings[${index}][class]`, sibling.class);
             });
-
-            // Formspree يعيد status 302 أو 200 عند النجاح
-            // نحن نعتبر أي status code أقل من 400 نجاح
-            if (resp.status >= 400) {
-                const errorText = await resp.text().catch(() => '');
-                throw new Error(`فشل الإرسال: ${resp.status} ${resp.statusText}`);
+            formData.append("agreement", form.agreement ? "1" : "0");
+            if (imageFile) {
+                formData.append("image", imageFile);
             }
 
-            // نجح الإرسال
+            await emailMutation.mutateAsync(formData);
+
+            // نجح الإرسال عبر الـ endpoint
             setSubmitted(true);
             setSubmitError(null);
             setForm({
@@ -202,6 +195,7 @@ export default function Contact() {
                 siblings: [],
                 agreement: false,
             });
+            setImageFile(null);
         } catch (error) {
             // معالجة الأخطاء
             const errorMessage = error instanceof Error 
@@ -419,12 +413,11 @@ export default function Contact() {
                                     name="hasSiblings"
                                     value="yes"
                                     checked={form.hasSiblings === true}
-                                    onChange={(e) => {
-                                        const value = e.target.value === "yes";
+                                    onChange={() => {
                                         setForm((prev) => ({
                                             ...prev,
-                                            hasSiblings: value,
-                                            siblings: value && prev.siblings.length === 0 ? [{ name: "", class: "" }] : prev.siblings
+                                            hasSiblings: true,
+                                            siblings: prev.siblings.length === 0 ? [{ name: "", class: "" }] : prev.siblings
                                         }));
                                         if (errors.hasSiblings || errors.siblings) {
                                             setErrors((prev) => ({ ...prev, hasSiblings: undefined, siblings: undefined }));
@@ -439,11 +432,10 @@ export default function Contact() {
                                     name="hasSiblings"
                                     value="no"
                                     checked={form.hasSiblings === false}
-                                    onChange={(e) => {
-                                        const value = e.target.value === "yes";
+                                    onChange={() => {
                                         setForm((prev) => ({
                                             ...prev,
-                                            hasSiblings: value ? true : false,
+                                            hasSiblings: false,
                                             siblings: []
                                         }));
                                         if (errors.hasSiblings || errors.siblings) {
@@ -519,6 +511,20 @@ export default function Contact() {
                             </div>
                         )}
                     </div>
+                <div>
+                    <label htmlFor="image" className="block mb-2 font-medium text-gray-700">{(t?.fields as Record<string, { label?: string }>)?.photo?.label || "اضافة صوره شخصي للطالب خلفية زرقاء"}</label>
+                    <input
+                        id="image"
+                        name="image"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                            const file = e.target.files && e.target.files[0] ? e.target.files[0] : null;
+                            setImageFile(file);
+                        }}
+                        className="w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#B33791] border-gray-300"
+                    />
+                </div>
 
                     <div className="bg-white rounded-lg p-4 border border-gray-200">
                         <label className="flex items-start gap-3 cursor-pointer">
@@ -536,6 +542,7 @@ export default function Contact() {
                         </label>
                         {errors.agreement && <p className="mt-2 text-sm text-red-600">{errors.agreement}</p>}
                     </div>
+
 
                     <button
                         type="submit"
