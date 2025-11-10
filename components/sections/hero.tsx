@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from 'react';
 import { ASSETS_PATHS } from './../constants/AssetsPaths';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Image from 'next/image';
@@ -7,9 +8,35 @@ import Link from 'next/link';
 
 export default function Hero() {
   const { translations } = useLanguage();
+  const [showRegistrationModal, setShowRegistrationModal] = useState(true);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
+    <>
+      {showRegistrationModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4">
+          <div className="relative  max-w-lg md:max-w-xl">
+            <button
+              type="button"
+              onClick={() => setShowRegistrationModal(false)}
+              className="absolute cursor-pointer z-50 -top-3 -right-3 flex h-10 w-10 items-center justify-center rounded-full bg-white text-lg font-semibold text-gray-700 shadow-lg transition hover:bg-gray-100"
+              aria-label="Close registration announcement"
+            >
+              ×
+            </button>
+            <Link href="/en/contact" className="block overflow-hidden rounded-3xl shadow-2xl transition hover:scale-[1.01]">
+              <Image
+                src={ASSETS_PATHS.registrationBanner}
+                alt="Academic registration announcement"
+                width={400}
+                height={300}
+                className="h-full w-full object-cover"
+                priority
+              />
+            </Link>
+          </div>
+        </div>
+      )}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
       {/* صورة الخلفية */}
       <Image 
         src={ASSETS_PATHS.img_Background} 
@@ -35,8 +62,8 @@ export default function Hero() {
           {translations?.Hero.subtitle || "نرحب بكم في رحلتنا التعليمية المتميزة حيث نغرس القيم والتميز الأكاديمي"}
         </p>
         <Link href="/en/contact">
-        <button className="bg-[#B33791] hover:bg-[#a02e80] text-white px-10 py-4 rounded-full text-lg font-bold shadow-lg transition-transform transform hover:scale-105 font-cairo">
-          {translations?.Hero.cta || "اكتشف المزيد"}
+        <button className="bg-[#B33791] cursor-pointer hover:bg-[#a02e80] text-white px-10 py-4 rounded-full text-lg font-bold shadow-lg transition-transform transform hover:scale-105 font-cairo">
+          {translations?.Hero.cta || "التسجيل الأكاديمي"}
         </button>
         </Link>
       </div>
@@ -44,5 +71,6 @@ export default function Hero() {
       {/* منحنى سفلي بسيط */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-white/90 rounded-t-[50%] backdrop-blur-sm"></div>
     </section>
+    </>
   );
 }

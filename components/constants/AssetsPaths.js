@@ -20,5 +20,6 @@ export const ASSETS_PATHS = {
     logo_small: '/img1.jpg',
     video: '/video2.mp4',
     about: '/about.jpg',
+    registrationBanner: '/registeriotn.jpg',
     
 };
