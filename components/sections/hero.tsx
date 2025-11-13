@@ -5,10 +5,16 @@ import { ASSETS_PATHS } from './../constants/AssetsPaths';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useGetBanner } from './../../hooks/use-banners';
 
 export default function Hero() {
   const { translations } = useLanguage();
   const [showRegistrationModal, setShowRegistrationModal] = useState(true);
+  const { data: banners } = useGetBanner();
+  const bannerImagePath = banners?.data?.[0]?.bannerImage;
+  const bannerImageSrc = bannerImagePath
+    ? `${process.env.NEXT_PUBLIC_API_BASE ?? ''}${bannerImagePath}`
+    : ASSETS_PATHS.registrationBanner;
 
   return (
     <>
@@ -25,7 +31,7 @@ export default function Hero() {
             </button>
             <Link href="/en/contact" className="block overflow-hidden rounded-3xl shadow-2xl transition hover:scale-[1.01]">
               <Image
-                src={ASSETS_PATHS.registrationBanner}
+                src={`${process.env.NEXT_PUBLIC_API_BASE ?? ''}${bannerImagePath}`}
                 alt="Academic registration announcement"
                 width={400}
                 height={300}
@@ -58,7 +64,7 @@ export default function Hero() {
         <h1 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight text-[#B33791] font-cairo">
           {translations?.Hero.title || "مدرسة الراشد الهندية"}
         </h1>
-        <p className="text-lg md:text-2xl mb-10 text-gray-100 font-cairo">
+        <p className="text-lg md:text-2xl mb-10 text-gray-500 font-cairo">
           {translations?.Hero.subtitle || "نرحب بكم في رحلتنا التعليمية المتميزة حيث نغرس القيم والتميز الأكاديمي"}
         </p>
         <Link href="/en/contact">
