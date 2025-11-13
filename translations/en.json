@@ -189,7 +189,16 @@
     "thankYou": "Thank you for your submission!",
     "formspreeEndpoint": "",
     "fields": {
-      "appliedClass": { "label": "Applied Class", "placeholder": "e.g., Grade 1" },
+      "appliedClass": { 
+        "label": "Applied Class", 
+        "placeholder": "e.g., Grade 1",
+        "selectPlaceholder": "Select Class",
+        "options": {
+          "firstKG": "First KG",
+          "secondKG": "Second KG"
+        }
+      },
+      "certificate": { "label": "Upload Certificate" },
       "studentCivilId": { "label": "Student Civil ID", "placeholder": "e.g., 123456789012" },
       "studentName": { "label": "Student Name", "placeholder": "Enter student name" },
       "nationality": { "label": "Nationality", "placeholder": "Enter nationality" },

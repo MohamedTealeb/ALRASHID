@@ -110,6 +110,13 @@ export default function Contact() {
         if (errors[name as keyof FormErrors]) {
             setErrors((prev) => ({ ...prev, [name]: undefined }));
         }
+        // إذا تغير appliedClass إلى غير "تانيه روضة"، امسح الصورة
+        if (name === "appliedClass") {
+            const secondKGValue = t?.fields?.appliedClass?.options?.secondKG || "تانيه روضة";
+            if (value !== secondKGValue) {
+                setImageFile(null);
+            }
+        }
     };
 
 
@@ -171,7 +178,7 @@ export default function Contact() {
             });
             formData.append("agreement", form.agreement ? "1" : "0");
             if (imageFile) {
-                formData.append("image", imageFile);
+                formData.append("certificate", imageFile);
             }
 
             await emailMutation.mutateAsync(formData);
@@ -219,19 +226,38 @@ export default function Contact() {
                 <form onSubmit={handleSubmit} method="POST" className="space-y-6 bg-gray-50 p-6 md:p-8 rounded-2xl shadow" dir="rtl">
                     <div>
                         <label htmlFor="appliedClass" className="block mb-2 font-medium text-gray-700">{t?.fields?.appliedClass?.label || "الصف المتقدم له"}</label>
-                        <input
+                        <select
                             id="appliedClass"
                             name="appliedClass"
-                            type="text"
                             value={form.appliedClass}
                             onChange={handleChange}
                             className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#B33791] ${errors.appliedClass ? "border-red-400" : "border-gray-300"}`}
-                            placeholder={t?.fields?.appliedClass?.placeholder || "مثال: الصف الأول"}
                             aria-invalid={Boolean(errors.appliedClass)}
                             aria-describedby={errors.appliedClass ? "appliedClass-error" : undefined}
-                        />
+                        >
+                            <option value="">{t?.fields?.appliedClass?.selectPlaceholder || "اختر الصف"}</option>
+                            <option value={t?.fields?.appliedClass?.options?.firstKG || "أولي روضة"}>{t?.fields?.appliedClass?.options?.firstKG || "أولي روضة"}</option>
+                            <option value={t?.fields?.appliedClass?.options?.secondKG || "تانيه روضة"}>{t?.fields?.appliedClass?.options?.secondKG || "تانيه روضة"}</option>
+                        </select>
                         {errors.appliedClass && <p id="appliedClass-error" className="mt-2 text-sm text-red-600">{errors.appliedClass}</p>}
                     </div>
+
+                    {form.appliedClass === (t?.fields?.appliedClass?.options?.secondKG || "تانيه روضة") && (
+                        <div>
+                            <label htmlFor="certificate" className="block mb-2 font-medium text-gray-700">{t?.fields?.certificate?.label || "يبعت الشهاده"}</label>
+                            <input
+                                id="certificate"
+                                name="certificate"
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => {
+                                    const file = e.target.files && e.target.files[0] ? e.target.files[0] : null;
+                                    setImageFile(file);
+                                }}
+                                className="w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#B33791] border-gray-300"
+                            />
+                        </div>
+                    )}
 
                     <div>
                         <label htmlFor="studentCivilId" className="block mb-2 font-medium text-gray-700">{t?.fields?.studentCivilId?.label || "رقم مدني الطالب"}</label>
@@ -511,20 +537,6 @@ export default function Contact() {
                             </div>
                         )}
                     </div>
-                <div>
-                    <label htmlFor="image" className="block mb-2 font-medium text-gray-700">{(t?.fields as Record<string, { label?: string }>)?.photo?.label || "اضافة صوره شخصي للطالب خلفية زرقاء"}</label>
-                    <input
-                        id="image"
-                        name="image"
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                            const file = e.target.files && e.target.files[0] ? e.target.files[0] : null;
-                            setImageFile(file);
-                        }}
-                        className="w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#B33791] border-gray-300"
-                    />
-                </div>
 
                     <div className="bg-white rounded-lg p-4 border border-gray-200">
                         <label className="flex items-start gap-3 cursor-pointer">

@@ -193,7 +193,16 @@
     "thankYou": "شكراً لك على تقديمك!",
     "formspreeEndpoint": "",
     "fields": {
-      "appliedClass": { "label": "الصف المتقدم له", "placeholder": "مثال: الصف الأول" },
+      "appliedClass": { 
+        "label": "الصف المتقدم له", 
+        "placeholder": "مثال: الصف الأول",
+        "selectPlaceholder": "اختر الصف",
+        "options": {
+          "firstKG": "أولي روضة",
+          "secondKG": "تانيه روضة"
+        }
+      },
+      "certificate": { "label": "ارسل الشهاده" },
       "studentCivilId": { "label": "رقم مدني الطالب", "placeholder": "مثال: 123456789012" },
       "studentName": { "label": "اسم الطالب", "placeholder": "أدخل اسم الطالب" },
       "nationality": { "label": "الجنسية", "placeholder": "أدخل الجنسية" },

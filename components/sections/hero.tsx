@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useGetBanner } from './../../hooks/use-banners';
 
+
 export default function Hero() {
   const { translations } = useLanguage();
   const [showRegistrationModal, setShowRegistrationModal] = useState(true);
@@ -31,7 +32,7 @@ export default function Hero() {
             </button>
             <Link href="/en/contact" className="block overflow-hidden rounded-3xl shadow-2xl transition hover:scale-[1.01]">
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_BASE ?? ''}${bannerImagePath}`}
+                src={bannerImageSrc}
                 alt="Academic registration announcement"
                 width={400}
                 height={300}
