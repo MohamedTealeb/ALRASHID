@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { ASSETS_PATHS } from './../constants/AssetsPaths';
 import { useLanguage } from '@/contexts/LanguageContext';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useGetBanner } from './../../hooks/use-banners';
 
@@ -31,13 +30,10 @@ export default function Hero() {
               ×
             </button>
             <Link href="/en/contact" className="block overflow-hidden rounded-3xl shadow-2xl transition hover:scale-[1.01]">
-              <Image
+              <img
                 src={bannerImageSrc}
                 alt="Academic registration announcement"
-                width={400}
-                height={300}
                 className="h-full w-full object-cover"
-                priority
               />
             </Link>
           </div>

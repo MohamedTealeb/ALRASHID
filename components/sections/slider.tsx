@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Image from "next/image";
 import { useImage } from './../../hooks/use-image';
 
 // Define proper types for the image data
@@ -92,13 +91,10 @@ export default function Slider() {
             >
               {images?.map((img: ImageData, idx: number) => (
                 <div key={idx} className="flex-none w-full h-full relative group">
-                  <Image
+                  <img
                     src={`${process.env.NEXT_PUBLIC_API_BASE}${img.imageUrl}`}
                     alt={`img${idx + 1}`}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    priority={idx === 0}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   {/* طبقة تظليل مع تأثير fade */}
                   
