@@ -33,7 +33,7 @@ export default function Hero() {
               <img
                 src={bannerImageSrc}
                 alt="Academic registration announcement"
-                className="h-full w-full object-cover"
+                className="h-96  max-h-[96vh] w-full object-cover"
               />
             </Link>
           </div>

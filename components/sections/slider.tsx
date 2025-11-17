@@ -90,7 +90,10 @@ export default function Slider() {
               }}
             >
               {images?.map((img: ImageData, idx: number) => (
-                <div key={idx} className="flex-none w-full h-full relative group">
+                <div
+                  key={idx}
+                  className="relative min-w-full h-full overflow-hidden group"
+                >
                   <img
                     src={`${process.env.NEXT_PUBLIC_API_BASE}${img.imageUrl}`}
                     alt={`img${idx + 1}`}
